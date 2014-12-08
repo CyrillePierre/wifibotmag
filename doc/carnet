@@ -1,0 +1,49 @@
+
+Test du magnétomètre de l'IMU.
+
+Récupération des valeurs des 3 capteurs dans des variables (16 bits).
+	Uniquement les valeurs des coordonnées x et y sont utilisés car on
+	considère que le robot sera toujours sur un terrain plat.
+
+	Ces valeurs sont stockées dans un vecteur de dimension 2 afin de pouvoir
+	effectuer des calculs simples comme la normalisation ou la rotation du
+	vecteur.
+
+Problème observé :
+	La mesure a été effectuée dans un train en mouvement, les données ne
+	sont donc pas pertinentes mais on peut quand même observer que si l'on
+	effectue une révolution complète du capteur, l'angle du vecteur se
+	limite uniquemenet à une partie de l'intervalle.
+	Il faut donc prendre en compte toutes les possibilités d'erreurs :
+		- le champ magnétique terrestre est peut être perturbé par un autre
+		champ plus fort.
+		- la mesure du capteur est peut être un peu plus compliqué à
+		traiter.
+		- la projection du vecteur 3D du capteur dans le plan XY est peut
+		être à l'origine du problème (en tout cas je pense que c'est une
+		mauvaise idée de ne pas utiliser le capteur en Z).
+
+Recherche de solution :
+	D'après la doc du MPU9150, il existe une donnée (sensitivy adjustment
+	values) qui pourrait être utile. Elle va peut être corriger le
+	problème. On va donc tester ça.
+
+Test de l'ajustement de valeur :
+	L'ajustement de valeur est une valeur constante que l'on peut
+	multiplier au vecteur du champ magnétique. Il ne fait rien d'autre que
+	de multiplier toutes les composantes par 0.5. Ça n'a donc pas résolu le
+	problème.
+
+Avec gnuplot, j'ai pu observer un peu la répartition des points mesurés
+dans un espace à 3 dimensions. On voit alors clairement que ces points sont
+répartis sur un cylindre qui n'est pas centré en zéro. La solution sera
+donc de translater le repère pour que les points forment un cylindre de
+révolution centré sur 0.
+
+Après quelques mesures et réglages, on peut déterminer que le capteur
+selon X est décalé de 12 et que le capteur selon Y est décalé de 100. On
+peut alors se demander d'où vient ce biais ? En tout cas la doc n'en parle
+pas ou alors c'est bien caché.
+
+
+Prochaine étape : contrôler le référencielle (en rotation)
