@@ -7,7 +7,7 @@
 const int XOFFSET = 12;	// Décalage en X de la mesure
 const int YOFFSET = 100;	// Décalage en Y de la mesure
 
-Compass::Compass() : _ref(0), _filter(100, 20)
+Compass::Compass() : _ref(0), _filter(.5, 10, 0)
 {
 }
 

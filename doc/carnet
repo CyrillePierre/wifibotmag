@@ -47,3 +47,54 @@ pas ou alors c'est bien caché.
 
 
 Prochaine étape : contrôler le référencielle (en rotation)
+
+J'vais d'abord commencer par réorganiser le code de façon un peu plus
+structuré. Normalement le capteur que sera utilisé n'est pas celui sur
+lequel les mesures ont été effectué actuellement. Il est donc plus
+judicieux d'écrire une classe qui va s'abstraire du composant utilisé pour
+ne fournir que les méthodes qui nous intéressent.
+Dans notre cas on besoin de :
+	- récupérer l'angle (soit en radian, soit en degrée, peu importe)
+	- définir le référencielle.
+Pour la récupération de l'angle, il suffira d'utiliser la classe Vector
+écrite précédement. Cependant l'angle sera calculé par rapport à l'angle de
+référence. Cet angle pourra bien évidement être redéfinit quand on veut.
+
+Après écriture du code, le changement de référentielle fonctionne sans
+problème. J'ai ajouté un bouton sur la carte pour créer un nouveau
+référentielle et donc remettre l'angle à 0. Il faut alors vérifier que lors
+du changement d'origine, l'angle continue de varier entre 180° et -180°.
+Mais la méthode rotate() de la classe vecteur fonctionne sans aucun
+problème. La rotation est donc parfaite.
+
+Pour observer de façon plus ergonomique l'évolution du capteur, on va
+maintenant essayer de mettre en place une petite boussole graphique à
+l'aide de Qt afin d'afficher en temps réel l'angle mesuré. Thomas
+s'occupera de la boussole (les valeurs seront prise depuis l'entré
+standard) pendant que j'écrierais un programme qui affiche sur sa sortie
+standard le contenu du port serie. Il n'y aura plus qu'à chainer les deux
+programmes (rediriger la sortie de l'un dans l'entrée de l'autre) pour voir
+la boussole suivre les mouvements du capteur.
+
+Bilan des 2 programmes :
+L'affichage marche nickel mis à part le fait que l'aiguille tourne dans le
+sens inverse. L'adaptation n'est pas très compliquée. On remarque ainsi
+plus facilement que le capteur est assez bruité et très sensible aux
+objets métalliques qui passe à proximité. Il va donc falloir mettre en
+place un filtre (sûrement un filtre de Kalman) pour lisser le mouvement.
+Une autre chose qu'il faudra également faire quand le capteur sera en place
+sur le robot sera de recalculer l'influence du champ magnétique du robot sur
+le capteur afin d'améliorer la précision des mesures.
+
+Prochaine étape : test du shield ethernet
+
+Etant donné que les données du capteur seront par la suite transmise en
+wifi ou en éthernet, il va falloir tester les cartes. Il y aura grande
+chance que par la suite on utilisera plutôt l'ethernet que le wifi pour
+plusieurs raisons :
+	- la borne wifi est intégré au robot. C'est un peu stupide d'utiliser
+	le Wifi pour un truc qui est à 10 cm.
+	- la qualité du réseau en ethernet est meilleur
+	- d'autres trucs
+
+Prochaine étape : filtre de Kalman

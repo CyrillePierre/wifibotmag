@@ -56,7 +56,7 @@ void loop()
                 comp.resetRef();
         }
 
-        cpt = 4;
+        cpt = 1;
     }
 
     if (!digitalRead(BTN_PIN))

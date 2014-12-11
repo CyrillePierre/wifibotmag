@@ -20,7 +20,7 @@ private:
     float	 _ref;	// angle de référence
     Vect	 _vec;	// Vecteur utilisé pour des calculs temporaires
     int		 _mx, _my, _mz;
-    Kalman	 _filter;
+    Kalman<float> _filter;
 
 public:
     Compass();
