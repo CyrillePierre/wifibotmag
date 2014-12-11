@@ -2,7 +2,7 @@
 
 ARDUINO_DIR     = /usr/share/arduino/
 TARGET          = output
-ARDUINO_LIBS    = Wire
+ARDUINO_LIBS    = Wire Ethernet SPI
 
 
 # Avrdude code for programming

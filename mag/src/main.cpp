@@ -1,67 +1,69 @@
 
 // Access to the Arduino Libraries
 #include <Arduino.h>
-#include <Wire.h>
+#include <Ethernet.h>
 
-// I2Cdev and MPU6050 must be installed as libraries, or else the .cpp/.h files
-// for both classes must be in the include path of your project
-#include "I2Cdev.h"
-#include "MPU6050.h"
-#include "vector2.hpp"
+#include "compass.hpp"
 
 // Define the pin where the led is connected
 #define LED_PIN  13
 #define BTN_PIN  7
 
-// class default I2C address is 0x68
-// specific I2C addresses may be passed as a parameter here
-// AD0 low = 0x68 (default for InvenSense evaluation board)
-// AD0 high = 0x69
-MPU6050 mpu;
+Compass comp;
+int cpt = 8;
 
-int16_t ax, ay, az;
-int16_t gx, gy, gz;
-int16_t mx, my, mz;
+// Configuration de l'adresse de la carte
+byte       mac[] = { 0xB0, 0x0B, 0x5A, 0xDA, 0xDA, 0xDA };
+IPAddress ip(192, 168, 42, 77);
+IPAddress dnsServer(192, 168, 42, 1);
+IPAddress gateway(192, 168, 42, 1);
+IPAddress subnet(255, 255, 255, 0);
 
-// Le vecteur acceillant la mesure du magnétomètre
-Vector2<float> mag;
-float asax, asay, asaz;
+// On utilisera le port 1337
+EthernetServer server(1337);
 
 void setup()
 {
+    // Initialisation de la connexion ethernet
+    Ethernet.begin(mac, ip, dnsServer, gateway, subnet);
+    server.begin();
+
     // join I2C bus (I2Cdev library doesn't do this automatically)
-    Wire.begin();
     Serial.begin(115200);
 
-    Serial.println("Initializing I2C devices...");
-    mpu.initialize();
+    comp.init();
 
-    Serial.println("Testing device connections...");
-    Serial.print("MPU9150 connection ");
-    Serial.println(mpu.testConnection() ? "successful" : "failed");
-
-    // configure Arduino LED for
     pinMode(LED_PIN, OUTPUT);
-
-    mpu.getMagAdjustment(&asax, &asay, &asaz);
+    pinMode(BTN_PIN, INPUT_PULLUP);
 }
 
 void loop()
 {
-    mpu.getMag(&mx, &my, &mz);
-    mag.set(mx - 12, my - 100).normalize();
+    float angle = comp.getAngleDegree() + 180;
 
-    // display tab-separated accel/gyro x/y/z values
-    Serial.print(mag.x); Serial.print(" ");
-    Serial.print(mag.y); Serial.print(" ");
-    Serial.println(mz);
-    Serial.print("angle = "); Serial.print(mag.angleDegree());
-    Serial.println(" deg");
-    Serial.println(mag.norm());
+    if (!cpt) {
+//        Serial.print("angle = "); Serial.print(comp.getAngleDegree());
+//        Serial.println(" deg");
+        Serial.println(angle);
+        server.println(angle);
 
-//    Serial.println();
+        // Envoi de l'angle sur le réseau
+        EthernetClient client = server.available();
+        if (client && client.available()) {
+            String cmd = client.readStringUntil('\n');
 
-    delay(200);
+            if (cmd == "reset")
+                comp.resetRef();
+        }
+
+        cpt = 4;
+    }
+
+    if (!digitalRead(BTN_PIN))
+        comp.resetRef();
+
+    delay(20);
+    --cpt;
 }
 
 int main()

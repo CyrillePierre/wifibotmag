@@ -1,0 +1,11 @@
+src/I2Cdev.cpp
+src/I2Cdev.h
+src/main.cpp
+src/MPU6050.cpp
+src/MPU6050.h
+src/vector2.hpp
+src/compass.hpp
+src/compass.cpp
+src/Makefile
+kalman.hpp
+src/kalman.hpp
