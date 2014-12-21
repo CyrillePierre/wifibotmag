@@ -46,7 +46,8 @@ T Kalman<T>::get(T val)
     _val += _k * (val - _val);
     _p   *= (1 - _k);
 
-    return _val;
+//    return _val;
+    return val;
 }
 
 #endif // KALMAN_HPP

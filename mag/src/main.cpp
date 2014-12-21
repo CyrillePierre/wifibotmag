@@ -62,7 +62,7 @@ void loop()
     if (!digitalRead(BTN_PIN))
         comp.resetRef();
 
-    delay(20);
+//    delay(20);
     --cpt;
 }
 
