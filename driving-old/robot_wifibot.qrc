@@ -1,0 +1,47 @@
+<RCC>
+    <qresource prefix="Robot_Wifibot">
+      <file>images/cog.png</file>
+      <file>images/clavier.png</file>
+      <file>images/controller.png</file>
+      <file>images/cross.png</file>
+      <file>images/door_open.png</file>
+      <file>images/gant.png</file>
+      <file>images/help.png</file>
+      <file>images/ill_connexion.png</file>
+      <file>images/joystick.png</file>
+      <file>images/keyboard.png</file>
+      <file>images/wifibot.png</file>
+      <file>images/link.png</file>
+      <file>images/link_break.png</file>
+      <file>images/thumb_up.png</file>
+      <file>images/tick.png</file>
+      <file>images/Qt_logo.png</file>
+      <file>images/wifibot_vide.png</file>
+      <file>images/wifibot_add.png</file>
+      <file>images/wifibot_del.png</file>
+      <file>images/webcam.png</file>
+      <file>images/usb.png</file>
+      <file>images/main_fist.png</file>
+      <file>images/main_flat_hand.png</file>
+      <file>images/main_index_finger.png</file>
+      <file>images/main_middle_finger.png</file>
+      <file>images/main_ring_finger.png</file>
+      <file>images/main_little_finger.png</file>
+      <file>images/main_not_index_finger.png</file>
+      <file>images/main_not_middle_finger.png</file>
+      <file>images/main_not_ring_finger.png</file>
+      <file>images/main_three_finger.png</file>
+      <file>images/main_index_little_finger.png</file>
+      <file>images/main_little_middle_finger.png</file>
+      <file>images/main_little_ring.png</file>
+      <file>images/main_ring_index_finger.png</file>
+      <file>images/main_ring_middle_finger.png</file>
+      <file>images/main_two_finger.png</file>
+      <file>images/rv_connexion.png</file>
+      <file>images/rv_baniere.png</file>
+      <file>images/5DT.png</file>
+      <file>images/intersense.png</file>
+      <file>images/iglasses.png</file>
+      <file>images/iglassesOff.png</file>
+    </qresource>
+</RCC>

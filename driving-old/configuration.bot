@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE xbel>
+<xbel version="1.0">
+    <WifiBotConfiguration>
+        <asservissement>yes</asservissement>
+        <WifiBotList>
+            <WifiBot expanded="yes">
+                <name>Prof</name>
+                <command>192.168.0.112</command>
+                <webcam>192.168.0.20</webcam>
+            </WifiBot>
+            <WifiBot expanded="no">
+                <name>Joyeux</name>
+                <command>192.168.0.113</command>
+                <webcam>192.168.0.13</webcam>
+            </WifiBot>
+            <WifiBot expanded="no">
+                <name>Grincheux</name>
+                <command>192.168.0.114</command>
+                <webcam>192.168.0.14</webcam>
+            </WifiBot>
+            <WifiBot expanded="no">
+                <name>Dormeur</name>
+                <command>192.168.0.116</command>
+                <webcam>192.168.0.16</webcam>
+            </WifiBot>
+            <WifiBot expanded="no">
+                <name>Atchoum</name>
+                <command>192.168.0.115</command>
+                <webcam>192.168.0.15</webcam>
+            </WifiBot>
+            <WifiBot expanded="yes">
+                <name>Timide</name>
+                <command>192.168.0.106</command>
+                <webcam>192.168.0.6</webcam>
+            </WifiBot>
+            <WifiBot expanded="no">
+                <name>Simplet</name>
+                <command>192.168.0.107</command>
+                <webcam>192.168.0.7</webcam>
+            </WifiBot>
+        </WifiBotList>
+    </WifiBotConfiguration>
+    <KeyboardConfiguration>
+        <MoveForwardCommand>z</MoveForwardCommand>
+        <MoveBackwardCommand>s</MoveBackwardCommand>
+        <GoRightCommand>d</GoRightCommand>
+        <GoLeftCommand>q</GoLeftCommand>
+        <SpeedUpCommand>p</SpeedUpCommand>
+        <SpeedDownCommand>o</SpeedDownCommand>
+    </KeyboardConfiguration>
+</xbel>
