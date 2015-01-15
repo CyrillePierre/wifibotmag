@@ -15,7 +15,10 @@ public:
     Kalman(T q, T r, T initVal);
 
     /** @brief Calcul d'une valeur filtrée */
-    T get(T val);
+    void update(T newVal);
+
+    /** Récupération de la valeur filtrée */
+    T get();
 };
 
 /**
@@ -33,21 +36,26 @@ Kalman<T>::Kalman(T q, T r, T initVal)
  * Cette méthode va effectuer le calcul de l'algorithme de filtrage de Kalman.
  * C'est une version simplifiée du filtre s'il n'y a qu'une seule valeur
  * @param val
- * @return
  */
 template <typename T>
-T Kalman<T>::get(T val)
+void Kalman<T>::update(T newVal)
 {
     // maj de la prédiction
     _p += _q;
 
     // maj de la mesure
     _k    = _p / (_p + _r);
-    _val += _k * (val - _val);
+    _val += _k * (newVal - _val);
     _p   *= (1 - _k);
+}
 
-//    return _val;
-    return val;
+/**
+ * @return la valeur filtrée
+ */
+template <typename T>
+T Kalman<T>::get()
+{
+    return _val;
 }
 
 #endif // KALMAN_HPP

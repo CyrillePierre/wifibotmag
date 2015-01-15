@@ -9,3 +9,5 @@ src/compass.cpp
 src/Makefile
 kalman.hpp
 src/kalman.hpp
+src/packet.hpp
+src/packet.cpp

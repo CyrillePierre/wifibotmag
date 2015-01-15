@@ -97,12 +97,12 @@ struct Vector2
     }
 
     /** @return l'angle du vecteur (par rapport à l'axe des x) */
-    T angle() {
+    T angle() const {
         return atan2(y, x);
     }
 
     /** @return l'angle en degrée */
-    T angleDegree() {
+    T angleDegree() const {
         return angle() * 180 / M_PI;
     }
 

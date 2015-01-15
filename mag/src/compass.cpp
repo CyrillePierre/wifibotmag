@@ -23,27 +23,24 @@ void Compass::init()
 /**
  * @return l'angle par rapport à la référence (en degrée)
  */
-float Compass::getAngleDegree()
+float Compass::getAngleDegree() const
 {
-    update();
-    return _filter.get(_vec.rotate(-_ref).angleDegree());
+    return _vec.angleDegree();
 }
 
 /**
  * @return l'angle par rapport à la référence (en radian)
  */
-float Compass::getAngle()
+float Compass::getAngle() const
 {
-    update();
-    return _vec.rotate(-_ref).angle();
+    return _vec.angle();
 }
 
 /**
  * @return l'angle de référence
  */
-float Compass::getAngleRef()
+float Compass::getAngleRef() const
 {
-    update();
     return _ref;
 }
 
@@ -53,7 +50,6 @@ float Compass::getAngleRef()
  */
 void Compass::resetRef()
 {
-    update();
     _ref = _vec.angle();
 }
 
@@ -64,5 +60,5 @@ void Compass::resetRef()
 void Compass::update()
 {
     _mpu.getMag(&_mx, &_my, &_mz);
-    _vec.set(_mx - XOFFSET, _my - YOFFSET);
+    _vec.set(_mx - XOFFSET, _my - YOFFSET).rotate(-_ref);
 }

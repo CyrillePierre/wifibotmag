@@ -23,4 +23,4 @@ build-uno/main.o: main.cpp \
  /usr/share/arduino//hardware/arduino/cores/arduino/Udp.h \
  /usr/share/arduino//hardware/arduino/cores/arduino/Stream.h compass.hpp \
  MPU6050.h I2Cdev.h /usr/share/arduino//libraries/Wire/Wire.h vector2.hpp \
- kalman.hpp
+ kalman.hpp packet.hpp
