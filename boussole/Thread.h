@@ -4,24 +4,21 @@
 #include <QThread>
 #include <iostream>
 
+
+
 class Thread : public QThread
 {
     Q_OBJECT
 
     private:
         double value;
+        static int const SIZE = 7;
+        char buffer[SIZE];
 
-        void run()
-        {
-            while(1)
-            {
-                std::cin >> value;
-				value = 360 - value;
-                emit changed2(value);
-            }
-        }
+        void run();
 
     public:
+        void formatValue();
         virtual ~Thread(){}
 
     signals:

@@ -15,6 +15,7 @@ LIBS += -L/usr/local/qwt-6.1.2-svn/lib/ -lqwt
 INCLUDEPATH += /usr/local/qwt-6.1.2-svn/include/
 
 SOURCES += main.cpp \
+    Thread.cpp \
     window.cpp
 
 HEADERS  += \
