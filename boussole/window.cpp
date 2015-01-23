@@ -46,7 +46,7 @@ Window::Window() : QMainWindow()
     thread->start();
 
     QObject::connect(this, SIGNAL(destroyed()), thread, SLOT(terminate()));
-    QObject::connect(thread, SIGNAL(changed2(double)), compass, SLOT(setValue(double)));
+    QObject::connect(thread, SIGNAL(changed(double)), compass, SLOT(setValue(double)));
 }
 
 Window::~Window()

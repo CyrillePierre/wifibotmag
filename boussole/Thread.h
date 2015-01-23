@@ -22,7 +22,7 @@ class Thread : public QThread
         virtual ~Thread(){}
 
     signals:
-        void changed2(double);
+        void changed(double);
 
 };
 

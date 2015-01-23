@@ -1,33 +1,35 @@
 #include "Thread.h"
 
 #include <iostream>
+#include <unistd.h>
+#include <stdint.h>
 
 /**
  * @brief : Méthode principale du thread
  */
 void Thread::run()
 {
+	int a;
     while(1)
     {
-        // On récupère la trame
-        std::cin.read(buffer, SIZE);
-
         // On la formate comme on veut
-        formatValue();
-
-        emit changed2(value);
+        if ((a = read(0, buffer, 8)) == 8) {
+			formatValue();
+			emit changed(value);
+			std::cout << value << std::endl;
+		}
     }
 }
 
 void Thread::formatValue()
 {
-    short v1  = buffer[SIZE - 2] & 0x0f << 8; // On recupère les 4 premiers bits de l'angle
-    char v2  = buffer[SIZE - 1];             // On récupère les 8 derniers
+    int16_t v1  = buffer[6] << 8; // On recupère les 4 premiers bits de l'angle
+    v1  |= buffer[7];             // On récupère les 8 derniers
 
-    value = v1 | v2;                         // On fusionne les 2
+    value = v1;        
 
     // On la met sous le bon format [-180, 180] -> [0, 360]
-    value = 360 - value;
+    value = 180 - value;
 }
 
 
