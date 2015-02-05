@@ -98,3 +98,62 @@ plusieurs raisons :
 	- d'autres trucs
 
 Prochaine étape : filtre de Kalman
+
+Pour éviter d'avoir à écrire une classe matrice, j'me suis limité à un
+filtre de Kalman d'ordre 1. C'est comme s'il s'agissait de matrice 1x1 et
+vecteurs 1 donc des scalaires. Le filtre est plutôt efficace une fois qu'il est
+bien réglé.
+
+
+Mise en place d'un format de trame pour l'envoi des données sur le réseau.
+
+M. Delobel souhaiterait que l'on envoie les données brutes du capteur ainsi que
+la valeur d'angle calculé. Cela permettrait de s'occuper de ces calculs du coté
+de l'ordi. Je pense que c'est plutôt dommage de faire ça du coté de l'ordi
+car on exploite de ce fait assez peu la puissance de calcul du microcontrôleur
+mais bon... Les calculs seront toujours fait puisque l'on envoie également la
+valeur d'angle. Autant laisser le filtre de Kalman sur cette valeur.
+
+Concernant les valeurs du magnétomètre, elles sont stockés sur 16bits mais ont
+en réalité une précision de 13bits. Si l'on a 3 capteurs on doit donc utiliser
+un minimum de 3 * 13 = 39 bits. on doit cependant toujours travailler en
+multiple de 8 donc on doit utiliser 40 bits. On peut laisser 1 bit comme ID mais
+ducoup ça fait un peu juste. Cependant on doit aussi envoyé l'angle sous la
+forme d'un nombre à virgule fixe. 
+
+Le nombre ira de -180 à 180. La partie entière est donc inférieur à 256 soit
+2^8. Il faut donc réserver 9 bits pour la partie entière. On peut donc à la
+limite laisser 4 bits pour la partie fractionnaire (qui donne déjà une précision
+d'1/16e d'angle) et donc utiliser 4 bits pour l'ID même si on en a pas d'utilité.
+
+Pour résumer, on a :
+	- 4  bits : identifiants
+	- 13 bits : capteur sur l'axe X
+	- 13 bits : capteur sur l'axe Y
+	- 13 bits : capteur sur l'axe Z
+	- 13 bits : valeur de l'angle
+ce qui nous donne un total de 56 bits soit 7 octets
+
+Finalement on est revenu sur un truc plus simple :
+	- 8 bits : identifiant
+	- 16 bits : capteur x
+	- 16 bits : capteur y
+	- 16 bits : capteur z
+	- 16 bits : valeur de l'angle
+ce qui donne un total de 9 octets.
+
+Travail à faire :
+	- Créer une application Qt permettant de calibrer le capteur à distance (6h)
+		- réinitialiser le calibrage du capteur
+		- afficher un graphique représentant les mesures brutes du capteur
+		- déterminer automatiquement le biais à appliquer pour la correction
+		- envoyer le biais de correction à la carte
+	- Mettre en place la commande de calibrage du coté de l'arduino	(2h)
+		- écrire un protocole pour l'envoi des données de calibrage
+		- mettre en place la commande
+	- Passer l'application arduino sur raspberry pi (3h)
+		- réaliser le montage
+		- adapter support en lego
+		- modifier le code (dans une autre version de mag)
+	
+		
