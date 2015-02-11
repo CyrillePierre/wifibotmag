@@ -6,19 +6,19 @@ pas énorme donc c'est pas très grave.
 Le premier octet sert d'identifiant de type de commande.
 
 	- envoi des données du capteur
-		- id = 0
-		- 2 octets : mx
-		- 2 octets : my
-		- 2 octets : mz
-		- 2 octets : angle en virgule fixe
+		- int8 : id = 0
+		- int16 : mx	(de -4096 à 4095)
+		- int16 : my	(de -4096 à 4095)
+		- int16 : mz	(de -4096 à 4095)
+		- int16 : angle en virgule fixe
 	
 	- réinitialisation de l'angle
-		- id = 1
+		- int8 : id = 1
 		- le reste est inutilisé
 	
 	- calibration du capteur
-		- id = 2
-		- 2 octets : biais sur x
-		- 2 octets : biais sur y
-		- 2 octets : biais sur z
-		- 2 octets : inutilisés
+		- int8 : id = 2
+		- int16 : biais sur x
+		- int16 : biais sur y
+		- int16 : biais sur z
+		- int16 : inutilisé

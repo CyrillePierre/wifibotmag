@@ -47,7 +47,7 @@ int main(int argc, char ** argv)
 {
 	unsigned char buf[9];
 	int16_t mx ,my, mz, ang;
-	int fd = createTCPSocket("192.168.0.44", "1337");
+	int fd = createTCPSocket("newton", "1337");
 
 	if (argc == 4) {
 		int16_t bx = atoi(argv[1]),

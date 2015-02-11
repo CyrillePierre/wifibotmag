@@ -47,11 +47,14 @@ bool InterfaceVideo::connect_video(const QString &numWifiBot)
 {
 	// On fixe une taille suffisante pour la video
 	imageLabel->setFixedSize(this->size());
+
+    // TODO à décommenter pour faire marcher la cam
 	// Démarrage de la connexion.
-	if (receiverThread_video->startVideo(numWifiBot))
-		return true;
-	else
-		return false;
+//	if (receiverThread_video->startVideo(numWifiBot))
+//		return true;
+//	else
+//		return false;
+    return true;
 }
 
 void InterfaceVideo::updatePixmap(const QImage &image)
@@ -64,6 +67,9 @@ void InterfaceVideo::updatePixmap(const QImage &image)
 
 void InterfaceVideo::displayImage()
 {
+    // TODO à enlever pour afficher l'image de la cam
+    return;
+
   QImage final ; //image QT affichée
 //  IplImage image; //image source
 

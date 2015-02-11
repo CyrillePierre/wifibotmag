@@ -142,14 +142,15 @@ void ConnectDialog::PushConnectButton()
 	execLabel2->setText(tr("Connexion a la WebCam..."));
 	execLabel2->repaint();
 
-	if (interfaceVideo->connect_video(configModel->getWebcamAddress(wifiComboBox->currentText())))
-		resultLabel2->setPixmap(QPixmap(":/images/tick.png"));
-	else
-		resultLabel2->setPixmap(QPixmap(":/images/cross.png"));
-	resultLabel2->repaint();
+    // TODO commnenté pour virer la cam
+    if (interfaceVideo->connect_video(configModel->getWebcamAddress(wifiComboBox->currentText())))
+        resultLabel2->setPixmap(QPixmap(":/images/tick.png"));
+    else
+        resultLabel2->setPixmap(QPixmap(":/images/cross.png"));
+    resultLabel2->repaint();
 
 	// Si la connexion a réussie.
-	if (controler->isConnected() && interfaceVideo->isConnected())
+    if (controler->isConnected() /*&& interfaceVideo->isConnected()*/)
 	{
 		execLabel3->setText(tr("Connexion réussie !"));
 		quitButton->setText(tr("Continuer"));

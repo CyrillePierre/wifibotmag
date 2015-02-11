@@ -1,8 +1,17 @@
 
-#include <Wire.h>
+#include <stdio.h>
+#include <unistd.h>
+#include <wiringPi.h>
+#include <wiringPiI2C.h>
 #include "compass.hpp"
 
-Compass::Compass() : _ref(0), _bx(0), _by(0), _bz(0), _filter(.5, 10, 0)
+Compass::Compass()
+	: _mag_fd(-1),
+	  _ref(0),
+	  _vec(0, 0),
+	  _mx(0), _my(0), _mz(0),
+	  _bx(0), _by(0), _bz(0),
+	  _filter(.5, 10, 0)
 {
 }
 
@@ -11,8 +20,24 @@ Compass::Compass() : _ref(0), _bx(0), _by(0), _bz(0), _filter(.5, 10, 0)
  */
 void Compass::init()
 {
-    Wire.begin();
-    _mpu.initialize();
+	int mpu_fd;
+
+	// Config d'un fd pour communiquer avec le MPU6050
+	if ((mpu_fd = wiringPiI2CSetup(0x68)) < 0) {
+		perror("wiringPiI2CSetup() accel");
+	}
+
+	// Initialisation de l'accéléromètre
+	wiringPiI2CWriteReg8(mpu_fd, 0x6b, 0);
+
+	// Activation du magnétomètre
+	wiringPiI2CWriteReg8(mpu_fd, 0x37, 0x02);
+
+	if ((_mag_fd = wiringPiI2CSetup(0x0c)) < 0) {
+		perror("wiringPiI2CSetup() accel");
+	}
+
+	close(mpu_fd);
 }
 
 /**
@@ -68,6 +93,18 @@ void Compass::calibrate(int16_t bx, int16_t by, int16_t bz)
  */
 void Compass::update()
 {
-    _mpu.getMag(&_mx, &_my, &_mz);
+	// Pour lire le capteur, il faut d'abord activer le mode single measurement
+	wiringPiI2CWriteReg8(_mag_fd, 0x0a, 0x01);
+
+	// Un délai de 10 millisecondes est nécéssaire pour que les capteurs
+	// aient le temps de faire une mesure
+	delay(10);
+
+	// Lecture des valeurs des capteurs
+	_mx = wiringPiI2CReadReg16(_mag_fd, 0x03);
+	_my = wiringPiI2CReadReg16(_mag_fd, 0x05);
+	_mz = wiringPiI2CReadReg16(_mag_fd, 0x07);
+
     _vec.set(mx(), my()).rotate(-_ref);
 }
+

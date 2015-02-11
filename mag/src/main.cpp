@@ -43,18 +43,32 @@ void loop()
     comp.update();
     pkt.set(0, comp);
 
-//    Serial.println(pkt.ang / 10000.);
-
     // Ecriture sur le réseau
     server.write(pkt.data(), Packet::SIZE);
+//    Serial.write(pkt.data(), Packet::SIZE);
 
-    // Envoi de l'angle sur le réseau
+//    Serial.print('[');
+//    Serial.print(comp.mx());
+//    Serial.print(',');
+//    Serial.print(comp.my());
+//    Serial.print(',');
+//    Serial.print(comp.mz());
+//    Serial.print("] : ");
+//    Serial.println(comp.getAngleDegree());
+
     EthernetClient client = server.available();
     if (client && client.available()) {
-        String cmd = client.readStringUntil('\n');
+        client.readBytes((char *) pkt.data(), Packet::SIZE);
 
-        if (cmd == "reset")
+        switch (pkt.id()) {
+        case Packet::RESET: 	// Commande reset
             comp.resetRef();
+            break;
+
+        case Packet::CALIB:	// Commande de calibrage
+            comp.calibrate(pkt.x(), pkt.y(), pkt.z());
+            break;
+        }
     }
 
     if (!digitalRead(BTN_PIN))
@@ -70,8 +84,7 @@ int main()
     init();		// Initialize Arduino Librairies
     setup();	// Initialisation de l'application
 
-    while (1)
-    {
+    while (1) {
         // Clignotement
         blinkState = !blinkState;
         digitalWrite(LED_PIN, blinkState);

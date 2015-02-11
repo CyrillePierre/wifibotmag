@@ -1,7 +1,7 @@
 #ifndef PACKET_HPP
 #define PACKET_HPP
 
-#include <Arduino.h>
+#include <stdint.h>
 #include "compass.hpp"
 
 /**
@@ -19,7 +19,7 @@ struct Packet
     static int8_t const	CALIB = 2;
 
 private:
-    byte _buf[SIZE];
+    uint8_t _buf[SIZE];
 
 public:
     /** @brief Modification de la trame */
@@ -28,8 +28,8 @@ public:
     /** @brief Modification de la trame à partir d'un magnétomètre */
     void set(int8_t, Compass const &);
 
-    inline byte const * data() const { return _buf; }
-    inline byte * data() { return _buf; }
+    inline uint8_t const * data() const { return _buf; }
+    inline uint8_t * data() { return _buf; }
     inline int8_t id() const { return _buf[0]; }
 
     inline int16_t x() const {

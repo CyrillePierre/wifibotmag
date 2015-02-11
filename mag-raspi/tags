@@ -1,0 +1,249 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.9~svn20110310	//
+CALIB	packet.hpp	/^    static int8_t const	CALIB = 2;$/;"	m	struct:Packet	access:public
+CFLAGS	Makefile	/^CFLAGS		= -Wall -pedantic -Wextra -std=c++11$/;"	m
+CLIENT_HPP	client.hpp	3;"	d
+COMPASS_HPP	compass.hpp	2;"	d
+CXX	Makefile	/^CXX			= g++$/;"	m
+Client	client.hpp	/^	Client(Client && c)		 : _fd(c._fd)	{}$/;"	f	class:Client	access:public	signature:(Client && c)
+Client	client.hpp	/^	Client(Client const & c) : _fd(c._fd)	{}$/;"	f	class:Client	access:public	signature:(Client const & c)
+Client	client.hpp	/^	Client(int fd)			 : _fd(fd)		{}$/;"	f	class:Client	access:public	signature:(int fd)
+Client	client.hpp	/^class Client$/;"	c
+Client::Client	client.hpp	/^	Client(Client && c)		 : _fd(c._fd)	{}$/;"	f	class:Client	access:public	signature:(Client && c)
+Client::Client	client.hpp	/^	Client(Client const & c) : _fd(c._fd)	{}$/;"	f	class:Client	access:public	signature:(Client const & c)
+Client::Client	client.hpp	/^	Client(int fd)			 : _fd(fd)		{}$/;"	f	class:Client	access:public	signature:(int fd)
+Client::_fd	client.hpp	/^	int _fd;$/;"	m	class:Client	access:private
+Client::asyncRun	client.hpp	/^	inline void asyncRun(Callable && callable) const$/;"	f	class:Client	access:public	signature:(Callable && callable) const
+Client::disconnect	client.hpp	/^	inline void disconnect() const$/;"	f	class:Client	access:public	signature:() const
+Client::operator <	client.hpp	/^	inline bool operator<(Client const & c) const$/;"	f	class:Client	access:public	signature:(Client const & c) const
+Client::read	client.hpp	/^	inline int read(Buffer buf, std::size_t size) const$/;"	f	class:Client	access:public	signature:(Buffer buf, std::size_t size) const
+Client::write	client.hpp	/^	inline int write(Buffer buf, std::size_t size) const$/;"	f	class:Client	access:public	signature:(Buffer buf, std::size_t size) const
+Clients	server.hpp	/^	typedef std::set<Client> Clients;$/;"	t	struct:Server	access:public
+Compass	compass.cpp	/^Compass::Compass() : _ref(0), _bx(0), _by(0), _bz(0), _filter(.5, 10, 0)$/;"	f	class:Compass	signature:()
+Compass	compass.hpp	/^    Compass();$/;"	p	class:Compass	access:public	signature:()
+Compass	compass.hpp	/^class Compass$/;"	c
+Compass::Compass	compass.cpp	/^Compass::Compass() : _ref(0), _bx(0), _by(0), _bz(0), _filter(.5, 10, 0)$/;"	f	class:Compass	signature:()
+Compass::Compass	compass.hpp	/^    Compass();$/;"	p	class:Compass	access:public	signature:()
+Compass::Vect	compass.hpp	/^    typedef Vector2<float> Vect;$/;"	t	class:Compass	access:public
+Compass::_bx	compass.hpp	/^    int16_t	_bx, _by, _bz;	\/\/ Biais des capteurs$/;"	m	class:Compass	access:private
+Compass::_by	compass.hpp	/^    int16_t	_bx, _by, _bz;	\/\/ Biais des capteurs$/;"	m	class:Compass	access:private
+Compass::_bz	compass.hpp	/^    int16_t	_bx, _by, _bz;	\/\/ Biais des capteurs$/;"	m	class:Compass	access:private
+Compass::_filter	compass.hpp	/^    Kalman<float> _filter;$/;"	m	class:Compass	access:private
+Compass::_mag_fd	compass.hpp	/^	int		_mag_fd;		\/\/ file descriptor de l'I2C du magnétomètre$/;"	m	class:Compass	access:private
+Compass::_mx	compass.hpp	/^    int16_t _mx, _my, _mz;	\/\/ valeurs des capteurs$/;"	m	class:Compass	access:private
+Compass::_my	compass.hpp	/^    int16_t _mx, _my, _mz;	\/\/ valeurs des capteurs$/;"	m	class:Compass	access:private
+Compass::_mz	compass.hpp	/^    int16_t _mx, _my, _mz;	\/\/ valeurs des capteurs$/;"	m	class:Compass	access:private
+Compass::_ref	compass.hpp	/^    float	_ref;			\/\/ angle de référence$/;"	m	class:Compass	access:private
+Compass::_vec	compass.hpp	/^    Vect	_vec;			\/\/ Vecteur utilisé pour des calculs temporaires$/;"	m	class:Compass	access:private
+Compass::calibrate	compass.cpp	/^void Compass::calibrate(int16_t bx, int16_t by, int16_t bz)$/;"	f	class:Compass	signature:(int16_t bx, int16_t by, int16_t bz)
+Compass::calibrate	compass.hpp	/^    void calibrate(int16_t bx, int16_t by, int16_t bz);$/;"	p	class:Compass	access:public	signature:(int16_t bx, int16_t by, int16_t bz)
+Compass::getAngle	compass.cpp	/^float Compass::getAngle() const$/;"	f	class:Compass	signature:() const
+Compass::getAngle	compass.hpp	/^    float getAngle() const;$/;"	p	class:Compass	access:public	signature:() const
+Compass::getAngleDegree	compass.cpp	/^float Compass::getAngleDegree() const$/;"	f	class:Compass	signature:() const
+Compass::getAngleDegree	compass.hpp	/^    float getAngleDegree() const;$/;"	p	class:Compass	access:public	signature:() const
+Compass::getAngleRef	compass.cpp	/^float Compass::getAngleRef() const$/;"	f	class:Compass	signature:() const
+Compass::getAngleRef	compass.hpp	/^    float getAngleRef() const;$/;"	p	class:Compass	access:public	signature:() const
+Compass::init	compass.cpp	/^void Compass::init()$/;"	f	class:Compass	signature:()
+Compass::init	compass.hpp	/^    void init();$/;"	p	class:Compass	access:public	signature:()
+Compass::mx	compass.hpp	/^    inline int16_t mx() const { return _mx - _bx; }$/;"	f	class:Compass	access:public	signature:() const
+Compass::my	compass.hpp	/^    inline int16_t my() const { return _my - _by; }$/;"	f	class:Compass	access:public	signature:() const
+Compass::mz	compass.hpp	/^    inline int16_t mz() const { return _mz - _bz; }$/;"	f	class:Compass	access:public	signature:() const
+Compass::resetRef	compass.cpp	/^void Compass::resetRef()$/;"	f	class:Compass	signature:()
+Compass::resetRef	compass.hpp	/^    void resetRef();$/;"	p	class:Compass	access:public	signature:()
+Compass::update	compass.cpp	/^void Compass::update()$/;"	f	class:Compass	signature:()
+Compass::update	compass.hpp	/^    void update();$/;"	p	class:Compass	access:public	signature:()
+DATA	packet.hpp	/^    static int8_t const	DATA  = 0;$/;"	m	struct:Packet	access:public
+DEBUG	Makefile	/^DEBUG		= no$/;"	m
+DEPENDS	Makefile	/^DEPENDS		= .depends$/;"	m
+ERROR_IF	server.cpp	14;"	d	file:
+EXEC	Makefile	/^EXEC		= $(notdir $(shell pwd))$/;"	m
+KALMAN_HPP	kalman.hpp	2;"	d
+Kalman	kalman.hpp	/^    Kalman(T q, T r, T initVal);$/;"	p	class:Kalman	access:public	signature:(T q, T r, T initVal)
+Kalman	kalman.hpp	/^Kalman<T>::Kalman(T q, T r, T initVal)$/;"	f	class:Kalman	signature:(T q, T r, T initVal)
+Kalman	kalman.hpp	/^class Kalman$/;"	c
+Kalman::Kalman	kalman.hpp	/^    Kalman(T q, T r, T initVal);$/;"	p	class:Kalman	access:public	signature:(T q, T r, T initVal)
+Kalman::Kalman	kalman.hpp	/^Kalman<T>::Kalman(T q, T r, T initVal)$/;"	f	class:Kalman	signature:(T q, T r, T initVal)
+Kalman::_k	kalman.hpp	/^    T _k;	\/\/ gain de Kalman$/;"	m	class:Kalman	access:private
+Kalman::_p	kalman.hpp	/^    T _p;	\/\/ estimation de la covariance de l'erreur$/;"	m	class:Kalman	access:private
+Kalman::_q	kalman.hpp	/^    T _q;	\/\/ bruit du processus$/;"	m	class:Kalman	access:private
+Kalman::_r	kalman.hpp	/^    T _r;	\/\/ bruit du capteur$/;"	m	class:Kalman	access:private
+Kalman::_val	kalman.hpp	/^    T _val;	\/\/ la valeur$/;"	m	class:Kalman	access:private
+Kalman::get	kalman.hpp	/^    T get();$/;"	p	class:Kalman	access:public	signature:()
+Kalman::get	kalman.hpp	/^T Kalman<T>::get()$/;"	f	class:Kalman	signature:()
+Kalman::update	kalman.hpp	/^    void update(T newVal);$/;"	p	class:Kalman	access:public	signature:(T newVal)
+Kalman::update	kalman.hpp	/^void Kalman<T>::update(T newVal)$/;"	f	class:Kalman	signature:(T newVal)
+LDFLAGS	Makefile	/^LDFLAGS		= -lwiringPi -lwiringPiDev -lm -lpthread$/;"	m
+OBJ	Makefile	/^OBJ			= $(addprefix $(OBJ_DIR)\/, $(SRC:.cpp=.o))$/;"	m
+OBJ_DIR	Makefile	/^OBJ_DIR     = obj$/;"	m
+PACKET_HPP	packet.hpp	2;"	d
+Packet	packet.hpp	/^struct Packet$/;"	s
+Packet::CALIB	packet.hpp	/^    static int8_t const	CALIB = 2;$/;"	m	struct:Packet	access:public
+Packet::DATA	packet.hpp	/^    static int8_t const	DATA  = 0;$/;"	m	struct:Packet	access:public
+Packet::RESET	packet.hpp	/^    static int8_t const	RESET = 1;$/;"	m	struct:Packet	access:public
+Packet::SIZE	packet.hpp	/^    static int const		SIZE = 9;$/;"	m	struct:Packet	access:public
+Packet::_buf	packet.hpp	/^    uint8_t _buf[SIZE];$/;"	m	struct:Packet	access:private
+Packet::a	packet.hpp	/^    inline int16_t a() const {$/;"	f	struct:Packet	access:public	signature:() const
+Packet::data	packet.hpp	/^    inline uint8_t * data() { return _buf; }$/;"	f	struct:Packet	access:public	signature:()
+Packet::data	packet.hpp	/^    inline uint8_t const * data() const { return _buf; }$/;"	f	struct:Packet	access:public	signature:() const
+Packet::id	packet.hpp	/^    inline int8_t id() const { return _buf[0]; }$/;"	f	struct:Packet	access:public	signature:() const
+Packet::set	packet.cpp	/^void Packet::set(int8_t id, Compass const & comp)$/;"	f	class:Packet	signature:(int8_t id, Compass const & comp)
+Packet::set	packet.cpp	/^void Packet::set(int8_t id, int16_t mx, int16_t my, int16_t mz, float ang)$/;"	f	class:Packet	signature:(int8_t id, int16_t mx, int16_t my, int16_t mz, float ang)
+Packet::set	packet.hpp	/^    void set(int8_t, Compass const &);$/;"	p	struct:Packet	access:public	signature:(int8_t, Compass const &)
+Packet::set	packet.hpp	/^    void set(int8_t, int16_t, int16_t, int16_t, float);$/;"	p	struct:Packet	access:public	signature:(int8_t, int16_t, int16_t, int16_t, float)
+Packet::x	packet.hpp	/^    inline int16_t x() const {$/;"	f	struct:Packet	access:public	signature:() const
+Packet::y	packet.hpp	/^    inline int16_t y() const {$/;"	f	struct:Packet	access:public	signature:() const
+Packet::z	packet.hpp	/^    inline int16_t z() const {$/;"	f	struct:Packet	access:public	signature:() const
+RESET	packet.hpp	/^    static int8_t const	RESET = 1;$/;"	m	struct:Packet	access:public
+SERVER_HPP	server.hpp	2;"	d
+SHELL	Makefile	/^SHELL		= bash$/;"	m
+SIZE	packet.hpp	/^    static int const		SIZE = 9;$/;"	m	struct:Packet	access:public
+SRC	Makefile	/^SRC			= $(wildcard *.cpp)$/;"	m
+Server	server.cpp	/^Server::Server(int port) : _port(port)$/;"	f	class:Server	signature:(int port)
+Server	server.hpp	/^	Server(int port);$/;"	p	struct:Server	access:public	signature:(int port)
+Server	server.hpp	/^struct Server$/;"	s
+Server::Clients	server.hpp	/^	typedef std::set<Client> Clients;$/;"	t	struct:Server	access:public
+Server::Server	server.cpp	/^Server::Server(int port) : _port(port)$/;"	f	class:Server	signature:(int port)
+Server::Server	server.hpp	/^	Server(int port);$/;"	p	struct:Server	access:public	signature:(int port)
+Server::_clients	server.hpp	/^	Clients	_clients;	\/\/ Ensemble des clients connectés$/;"	m	struct:Server	access:private
+Server::_fd	server.hpp	/^	int		_fd;		\/\/ socket$/;"	m	struct:Server	access:private
+Server::_port	server.hpp	/^	int		_port;		\/\/ port de connexion$/;"	m	struct:Server	access:private
+Server::accept	server.cpp	/^Client const & Server::accept()$/;"	f	class:Server	signature:()
+Server::accept	server.hpp	/^	Client const & accept();$/;"	p	struct:Server	access:public	signature:()
+Server::asyncAcceptLoop	server.hpp	/^	void asyncAcceptLoop(Func && fn);$/;"	p	struct:Server	access:public	signature:(Func && fn)
+Server::asyncAcceptLoop	server.hpp	/^inline void Server::asyncAcceptLoop(Func && fn)$/;"	f	class:Server	signature:(Func && fn)
+Server::connect	server.cpp	/^void Server::connect()$/;"	f	class:Server	signature:()
+Server::connect	server.hpp	/^	void connect();$/;"	p	struct:Server	access:public	signature:()
+Server::disconnect	server.cpp	/^void Server::disconnect()$/;"	f	class:Server	signature:()
+Server::disconnect	server.hpp	/^	void disconnect();$/;"	p	struct:Server	access:public	signature:()
+Server::writeAll	server.hpp	/^	void writeAll(Buffer && buf, std::size_t size) const;$/;"	p	struct:Server	access:public	signature:(Buffer && buf, std::size_t size) const
+Server::writeAll	server.hpp	/^inline void Server::writeAll(Buffer && buf, std::size_t size) const$/;"	f	class:Server	signature:(Buffer && buf, std::size_t size) const
+VECTOR2_HPP	vector2.hpp	2;"	d
+Vect	compass.hpp	/^    typedef Vector2<float> Vect;$/;"	t	class:Compass	access:public
+Vector2	vector2.hpp	/^    Vector2(T x = 0, T y = 0) : x(x), y(y) {}$/;"	f	struct:Vector2	access:public	signature:(T x = 0, T y = 0)
+Vector2	vector2.hpp	/^    Vector2(Vector2 const & v) : x(v.x), y(v.y) {}$/;"	f	struct:Vector2	access:public	signature:(Vector2 const & v)
+Vector2	vector2.hpp	/^struct Vector2$/;"	s
+Vector2::Vector2	vector2.hpp	/^    Vector2(T x = 0, T y = 0) : x(x), y(y) {}$/;"	f	struct:Vector2	access:public	signature:(T x = 0, T y = 0)
+Vector2::Vector2	vector2.hpp	/^    Vector2(Vector2 const & v) : x(v.x), y(v.y) {}$/;"	f	struct:Vector2	access:public	signature:(Vector2 const & v)
+Vector2::angle	vector2.hpp	/^    T angle() const {$/;"	f	struct:Vector2	access:public	signature:() const
+Vector2::angleDegree	vector2.hpp	/^    T angleDegree() const {$/;"	f	struct:Vector2	access:public	signature:() const
+Vector2::cpy	vector2.hpp	/^    Vector2<T> cpy() {$/;"	f	struct:Vector2	access:public	signature:()
+Vector2::create	vector2.hpp	/^    static Vector2<T> create(T const & norm, T const & angle) {$/;"	f	struct:Vector2	access:public	signature:(T const & norm, T const & angle)
+Vector2::createDegree	vector2.hpp	/^    static Vector2<T> createDegree(T const & norm, T const & angle) {$/;"	f	struct:Vector2	access:public	signature:(T const & norm, T const & angle)
+Vector2::norm	vector2.hpp	/^    T norm() const {$/;"	f	struct:Vector2	access:public	signature:() const
+Vector2::normalize	vector2.hpp	/^    Vector2<T> & normalize() {$/;"	f	struct:Vector2	access:public	signature:()
+Vector2::operator !=	vector2.hpp	/^    bool operator != (Vector2<T> const & v) const {$/;"	f	struct:Vector2	access:public	signature:(Vector2<T> const & v) const
+Vector2::operator *	vector2.hpp	/^    T operator * (Vector2<T> const & v) const {$/;"	f	struct:Vector2	access:public	signature:(Vector2<T> const & v) const
+Vector2::operator *	vector2.hpp	/^    Vector2<T> operator * (T const & t) const {$/;"	f	struct:Vector2	access:public	signature:(T const & t) const
+Vector2::operator *=	vector2.hpp	/^    Vector2<T> & operator *= (T const & t) {$/;"	f	struct:Vector2	access:public	signature:(T const & t)
+Vector2::operator +	vector2.hpp	/^    Vector2<T> operator + (Vector2<T> const & v) const {$/;"	f	struct:Vector2	access:public	signature:(Vector2<T> const & v) const
+Vector2::operator +=	vector2.hpp	/^    Vector2<T> & operator += (Vector2<T> const & v) {$/;"	f	struct:Vector2	access:public	signature:(Vector2<T> const & v)
+Vector2::operator -	vector2.hpp	/^    Vector2<T> operator - (Vector2<T> const & v) const {$/;"	f	struct:Vector2	access:public	signature:(Vector2<T> const & v) const
+Vector2::operator -=	vector2.hpp	/^    Vector2<T> & operator -= (Vector2<T> const & v) {$/;"	f	struct:Vector2	access:public	signature:(Vector2<T> const & v)
+Vector2::operator /	vector2.hpp	/^    Vector2<T> operator \/ (T const & t) const {$/;"	f	struct:Vector2	access:public	signature:(T const & t) const
+Vector2::operator /=	vector2.hpp	/^    Vector2<T> & operator \/= (T const & t) {$/;"	f	struct:Vector2	access:public	signature:(T const & t)
+Vector2::operator =	vector2.hpp	/^    Vector2 operator = (Vector2<T> const & v);$/;"	p	struct:Vector2	access:public	signature:(Vector2<T> const & v)
+Vector2::operator ==	vector2.hpp	/^    bool operator == (Vector2<T> const & v) const {$/;"	f	struct:Vector2	access:public	signature:(Vector2<T> const & v) const
+Vector2::rotate	vector2.hpp	/^    Vector2<T> & rotate(T const & angle) {$/;"	f	struct:Vector2	access:public	signature:(T const & angle)
+Vector2::rotateDegree	vector2.hpp	/^    Vector2<T> & rotateDegree(T const & angle) {$/;"	f	struct:Vector2	access:public	signature:(T const & angle)
+Vector2::set	vector2.hpp	/^    Vector2<T> & set(T const & x, T const & y)$/;"	f	struct:Vector2	access:public	signature:(T const & x, T const & y)
+Vector2::x	vector2.hpp	/^    T x;$/;"	m	struct:Vector2	access:public
+Vector2::y	vector2.hpp	/^    T y;$/;"	m	struct:Vector2	access:public
+_buf	packet.hpp	/^    uint8_t _buf[SIZE];$/;"	m	struct:Packet	access:private
+_bx	compass.hpp	/^    int16_t	_bx, _by, _bz;	\/\/ Biais des capteurs$/;"	m	class:Compass	access:private
+_by	compass.hpp	/^    int16_t	_bx, _by, _bz;	\/\/ Biais des capteurs$/;"	m	class:Compass	access:private
+_bz	compass.hpp	/^    int16_t	_bx, _by, _bz;	\/\/ Biais des capteurs$/;"	m	class:Compass	access:private
+_clients	server.hpp	/^	Clients	_clients;	\/\/ Ensemble des clients connectés$/;"	m	struct:Server	access:private
+_fd	client.hpp	/^	int _fd;$/;"	m	class:Client	access:private
+_fd	server.hpp	/^	int		_fd;		\/\/ socket$/;"	m	struct:Server	access:private
+_filter	compass.hpp	/^    Kalman<float> _filter;$/;"	m	class:Compass	access:private
+_k	kalman.hpp	/^    T _k;	\/\/ gain de Kalman$/;"	m	class:Kalman	access:private
+_mag_fd	compass.hpp	/^	int		_mag_fd;		\/\/ file descriptor de l'I2C du magnétomètre$/;"	m	class:Compass	access:private
+_mx	compass.hpp	/^    int16_t _mx, _my, _mz;	\/\/ valeurs des capteurs$/;"	m	class:Compass	access:private
+_my	compass.hpp	/^    int16_t _mx, _my, _mz;	\/\/ valeurs des capteurs$/;"	m	class:Compass	access:private
+_mz	compass.hpp	/^    int16_t _mx, _my, _mz;	\/\/ valeurs des capteurs$/;"	m	class:Compass	access:private
+_p	kalman.hpp	/^    T _p;	\/\/ estimation de la covariance de l'erreur$/;"	m	class:Kalman	access:private
+_port	server.hpp	/^	int		_port;		\/\/ port de connexion$/;"	m	struct:Server	access:private
+_q	kalman.hpp	/^    T _q;	\/\/ bruit du processus$/;"	m	class:Kalman	access:private
+_r	kalman.hpp	/^    T _r;	\/\/ bruit du capteur$/;"	m	class:Kalman	access:private
+_ref	compass.hpp	/^    float	_ref;			\/\/ angle de référence$/;"	m	class:Compass	access:private
+_val	kalman.hpp	/^    T _val;	\/\/ la valeur$/;"	m	class:Kalman	access:private
+_vec	compass.hpp	/^    Vect	_vec;			\/\/ Vecteur utilisé pour des calculs temporaires$/;"	m	class:Compass	access:private
+a	packet.hpp	/^    inline int16_t a() const {$/;"	f	struct:Packet	access:public	signature:() const
+accept	server.cpp	/^Client const & Server::accept()$/;"	f	class:Server	signature:()
+accept	server.hpp	/^	Client const & accept();$/;"	p	struct:Server	access:public	signature:()
+angle	vector2.hpp	/^    T angle() const {$/;"	f	struct:Vector2	access:public	signature:() const
+angleDegree	vector2.hpp	/^    T angleDegree() const {$/;"	f	struct:Vector2	access:public	signature:() const
+asyncAcceptLoop	server.hpp	/^	void asyncAcceptLoop(Func && fn);$/;"	p	struct:Server	access:public	signature:(Func && fn)
+asyncAcceptLoop	server.hpp	/^inline void Server::asyncAcceptLoop(Func && fn)$/;"	f	class:Server	signature:(Func && fn)
+asyncRun	client.hpp	/^	inline void asyncRun(Callable && callable) const$/;"	f	class:Client	access:public	signature:(Callable && callable) const
+calibrate	compass.cpp	/^void Compass::calibrate(int16_t bx, int16_t by, int16_t bz)$/;"	f	class:Compass	signature:(int16_t bx, int16_t by, int16_t bz)
+calibrate	compass.hpp	/^    void calibrate(int16_t bx, int16_t by, int16_t bz);$/;"	p	class:Compass	access:public	signature:(int16_t bx, int16_t by, int16_t bz)
+clientTask	main.cpp	/^void clientTask(Client &c)$/;"	f	signature:(Client &c)
+connect	server.cpp	/^void Server::connect()$/;"	f	class:Server	signature:()
+connect	server.hpp	/^	void connect();$/;"	p	struct:Server	access:public	signature:()
+cpy	vector2.hpp	/^    Vector2<T> cpy() {$/;"	f	struct:Vector2	access:public	signature:()
+create	vector2.hpp	/^    static Vector2<T> create(T const & norm, T const & angle) {$/;"	f	struct:Vector2	access:public	signature:(T const & norm, T const & angle)
+createDegree	vector2.hpp	/^    static Vector2<T> createDegree(T const & norm, T const & angle) {$/;"	f	struct:Vector2	access:public	signature:(T const & norm, T const & angle)
+data	packet.hpp	/^    inline uint8_t * data() { return _buf; }$/;"	f	struct:Packet	access:public	signature:()
+data	packet.hpp	/^    inline uint8_t const * data() const { return _buf; }$/;"	f	struct:Packet	access:public	signature:() const
+disconnect	client.hpp	/^	inline void disconnect() const$/;"	f	class:Client	access:public	signature:() const
+disconnect	server.cpp	/^void Server::disconnect()$/;"	f	class:Server	signature:()
+disconnect	server.hpp	/^	void disconnect();$/;"	p	struct:Server	access:public	signature:()
+get	kalman.hpp	/^    T get();$/;"	p	class:Kalman	access:public	signature:()
+get	kalman.hpp	/^T Kalman<T>::get()$/;"	f	class:Kalman	signature:()
+getAngle	compass.cpp	/^float Compass::getAngle() const$/;"	f	class:Compass	signature:() const
+getAngle	compass.hpp	/^    float getAngle() const;$/;"	p	class:Compass	access:public	signature:() const
+getAngleDegree	compass.cpp	/^float Compass::getAngleDegree() const$/;"	f	class:Compass	signature:() const
+getAngleDegree	compass.hpp	/^    float getAngleDegree() const;$/;"	p	class:Compass	access:public	signature:() const
+getAngleRef	compass.cpp	/^float Compass::getAngleRef() const$/;"	f	class:Compass	signature:() const
+getAngleRef	compass.hpp	/^    float getAngleRef() const;$/;"	p	class:Compass	access:public	signature:() const
+id	packet.hpp	/^    inline int8_t id() const { return _buf[0]; }$/;"	f	struct:Packet	access:public	signature:() const
+init	compass.cpp	/^void Compass::init()$/;"	f	class:Compass	signature:()
+init	compass.hpp	/^    void init();$/;"	p	class:Compass	access:public	signature:()
+loop	main.cpp	/^void loop()$/;"	f	signature:()
+main	main.cpp	/^int main()$/;"	f	signature:()
+mx	compass.hpp	/^    inline int16_t mx() const { return _mx - _bx; }$/;"	f	class:Compass	access:public	signature:() const
+my	compass.hpp	/^    inline int16_t my() const { return _my - _by; }$/;"	f	class:Compass	access:public	signature:() const
+mz	compass.hpp	/^    inline int16_t mz() const { return _mz - _bz; }$/;"	f	class:Compass	access:public	signature:() const
+norm	vector2.hpp	/^    T norm() const {$/;"	f	struct:Vector2	access:public	signature:() const
+normalize	vector2.hpp	/^    Vector2<T> & normalize() {$/;"	f	struct:Vector2	access:public	signature:()
+operator !=	vector2.hpp	/^    bool operator != (Vector2<T> const & v) const {$/;"	f	struct:Vector2	access:public	signature:(Vector2<T> const & v) const
+operator *	vector2.hpp	/^    T operator * (Vector2<T> const & v) const {$/;"	f	struct:Vector2	access:public	signature:(Vector2<T> const & v) const
+operator *	vector2.hpp	/^    Vector2<T> operator * (T const & t) const {$/;"	f	struct:Vector2	access:public	signature:(T const & t) const
+operator *	vector2.hpp	/^Vector2<T> operator * (T const & coef, Vector2<T> const & v)$/;"	f	signature:(T const & coef, Vector2<T> const & v)
+operator *=	vector2.hpp	/^    Vector2<T> & operator *= (T const & t) {$/;"	f	struct:Vector2	access:public	signature:(T const & t)
+operator +	vector2.hpp	/^    Vector2<T> operator + (Vector2<T> const & v) const {$/;"	f	struct:Vector2	access:public	signature:(Vector2<T> const & v) const
+operator +=	vector2.hpp	/^    Vector2<T> & operator += (Vector2<T> const & v) {$/;"	f	struct:Vector2	access:public	signature:(Vector2<T> const & v)
+operator -	vector2.hpp	/^    Vector2<T> operator - (Vector2<T> const & v) const {$/;"	f	struct:Vector2	access:public	signature:(Vector2<T> const & v) const
+operator -=	vector2.hpp	/^    Vector2<T> & operator -= (Vector2<T> const & v) {$/;"	f	struct:Vector2	access:public	signature:(Vector2<T> const & v)
+operator /	vector2.hpp	/^    Vector2<T> operator \/ (T const & t) const {$/;"	f	struct:Vector2	access:public	signature:(T const & t) const
+operator /=	vector2.hpp	/^    Vector2<T> & operator \/= (T const & t) {$/;"	f	struct:Vector2	access:public	signature:(T const & t)
+operator <	client.hpp	/^	inline bool operator<(Client const & c) const$/;"	f	class:Client	access:public	signature:(Client const & c) const
+operator =	vector2.hpp	/^    Vector2 operator = (Vector2<T> const & v);$/;"	p	struct:Vector2	access:public	signature:(Vector2<T> const & v)
+operator ==	vector2.hpp	/^    bool operator == (Vector2<T> const & v) const {$/;"	f	struct:Vector2	access:public	signature:(Vector2<T> const & v) const
+read	client.hpp	/^	inline int read(Buffer buf, std::size_t size) const$/;"	f	class:Client	access:public	signature:(Buffer buf, std::size_t size) const
+resetRef	compass.cpp	/^void Compass::resetRef()$/;"	f	class:Compass	signature:()
+resetRef	compass.hpp	/^    void resetRef();$/;"	p	class:Compass	access:public	signature:()
+rotate	vector2.hpp	/^    Vector2<T> & rotate(T const & angle) {$/;"	f	struct:Vector2	access:public	signature:(T const & angle)
+rotateDegree	vector2.hpp	/^    Vector2<T> & rotateDegree(T const & angle) {$/;"	f	struct:Vector2	access:public	signature:(T const & angle)
+set	packet.cpp	/^void Packet::set(int8_t id, Compass const & comp)$/;"	f	class:Packet	signature:(int8_t id, Compass const & comp)
+set	packet.cpp	/^void Packet::set(int8_t id, int16_t mx, int16_t my, int16_t mz, float ang)$/;"	f	class:Packet	signature:(int8_t id, int16_t mx, int16_t my, int16_t mz, float ang)
+set	packet.hpp	/^    void set(int8_t, Compass const &);$/;"	p	struct:Packet	access:public	signature:(int8_t, Compass const &)
+set	packet.hpp	/^    void set(int8_t, int16_t, int16_t, int16_t, float);$/;"	p	struct:Packet	access:public	signature:(int8_t, int16_t, int16_t, int16_t, float)
+set	vector2.hpp	/^    Vector2<T> & set(T const & x, T const & y)$/;"	f	struct:Vector2	access:public	signature:(T const & x, T const & y)
+update	compass.cpp	/^void Compass::update()$/;"	f	class:Compass	signature:()
+update	compass.hpp	/^    void update();$/;"	p	class:Compass	access:public	signature:()
+update	kalman.hpp	/^    void update(T newVal);$/;"	p	class:Kalman	access:public	signature:(T newVal)
+update	kalman.hpp	/^void Kalman<T>::update(T newVal)$/;"	f	class:Kalman	signature:(T newVal)
+write	client.hpp	/^	inline int write(Buffer buf, std::size_t size) const$/;"	f	class:Client	access:public	signature:(Buffer buf, std::size_t size) const
+writeAll	server.hpp	/^	void writeAll(Buffer && buf, std::size_t size) const;$/;"	p	struct:Server	access:public	signature:(Buffer && buf, std::size_t size) const
+writeAll	server.hpp	/^inline void Server::writeAll(Buffer && buf, std::size_t size) const$/;"	f	class:Server	signature:(Buffer && buf, std::size_t size) const
+x	packet.hpp	/^    inline int16_t x() const {$/;"	f	struct:Packet	access:public	signature:() const
+x	vector2.hpp	/^    T x;$/;"	m	struct:Vector2	access:public
+y	packet.hpp	/^    inline int16_t y() const {$/;"	f	struct:Packet	access:public	signature:() const
+y	vector2.hpp	/^    T y;$/;"	m	struct:Vector2	access:public
+z	packet.hpp	/^    inline int16_t z() const {$/;"	f	struct:Packet	access:public	signature:() const

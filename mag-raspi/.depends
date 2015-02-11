@@ -1,0 +1,5 @@
+obj/server.o: server.cpp server.hpp client.hpp
+obj/packet.o: packet.cpp packet.hpp compass.hpp vector2.hpp kalman.hpp
+obj/compass.o: compass.cpp compass.hpp vector2.hpp kalman.hpp
+obj/main.o: main.cpp compass.hpp vector2.hpp kalman.hpp packet.hpp server.hpp \
+obj/ client.hpp
