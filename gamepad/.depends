@@ -1,0 +1,4 @@
+obj/controler.o: controler.cpp controler.hpp
+obj/driver.o: driver.cpp
+obj/connection.o: connection.cpp connection.hpp
+obj/main.o: main.cpp
