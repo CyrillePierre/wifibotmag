@@ -7,7 +7,7 @@ EXEC		= $(notdir $(shell pwd))
 CXX			= g++
 STANDARD	= -std=c++11
 CFLAGS		= -Wall -pedantic -Wextra 
-LDFLAGS		= -lSDL -lpthread
+LDFLAGS		= -lSDL2 -lpthread
 
 OBJ_DIR     = obj
 DEPENDS		= .depends

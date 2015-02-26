@@ -1,6 +1,5 @@
 
 #include <unistd.h>
-#include <SDL/SDL.h>
 #include <iostream>
 
 #include "gamepad.hpp"
