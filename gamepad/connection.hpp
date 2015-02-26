@@ -24,11 +24,11 @@ public:
 
 	/** @brief Lecture de données sur la socket */
 	template <typename Buffer>
-	std::size_t read(Buffer &&, std::size_t);
+	std::size_t read(Buffer &&, std::size_t) const;
 
 	/** @brief Ecriture de données sur la socket */
 	template <typename Buffer>
-	std::size_t write(Buffer &&, std::size_t);
+	std::size_t write(Buffer &&, std::size_t) const;
 };
 
 /**
@@ -38,7 +38,7 @@ public:
  * @return le nombre d'octets reçu ou -1 en cas d'erreur
  */
 template <typename Buffer>
-std::size_t Connection::read(Buffer && buf, std::size_t size)
+std::size_t Connection::read(Buffer && buf, std::size_t size) const
 {
 	return ::read(_fd, std::forward<Buffer>(buf), size);
 }
@@ -50,7 +50,7 @@ std::size_t Connection::read(Buffer && buf, std::size_t size)
  * @return le nombre d'octets envoyés ou -1 en cas d'erreur
  */
 template <typename Buffer>
-std::size_t Connection::write(Buffer && buf, std::size_t size)
+std::size_t Connection::write(Buffer && buf, std::size_t size) const
 {
 	return ::write(_fd, std::forward<Buffer>(buf), size);
 }

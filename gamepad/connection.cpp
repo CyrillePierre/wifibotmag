@@ -34,4 +34,5 @@ Connection::Connection(char const * name, char const * port)
 Connection::~Connection()
 {
 	close(_fd);
-}	
+}
+	
