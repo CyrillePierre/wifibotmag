@@ -1,0 +1,89 @@
+
+Programmes réalisés :
+	- serveur d'écoute du magnétomètre pour Arduino         
+	- serveur d'écoute du magnétomètre pour Raspberry Pi    
+	- terminal port série en console                        
+	- boussole                                              
+	- calibreur                                             
+	- adaptation Linux/Qt5 du piloteur de wifibot           
+	- programme de test réseau du magnétomètre              
+	- piloteur des robots avec le gamepad					
+	- script de lancement automatisé des programmes			
+
+Montages réalisés :
+	- montage Arduino : shield ethernet + MPU9150
+	- montage Raspberry : MPU9150 + caméra Pi
+	- support en lego
+
+Concepts et technologies utilisés :
+	- lib standard C++11
+	- lib Qt
+	- lib SDL
+	- lib WiringPi
+	- Wifi Ad-Hoc / AP
+	- réseau : pare-feu, table de routage, architecture
+	- streaming vidéo : raspivid, mplayer, netcat
+	- multithreading
+	- algo de recherche de centre
+	- communication I2C
+	- communication par port série
+	- programmation réseau
+	- MPU9150
+	- programmation Arduino
+	- filtre de Kalman
+
+
+---------------------------------------------------------------------
+PLAN
+
+Introduction
+Prise en main du matériel
+	Le wifibot
+		Architecture du robot
+			- éléments du robots
+			- architecture réseau
+		Communication avec le robot
+			- interface web
+			- application de commande
+		Configuration du Wifi
+			- ad-hoc
+			- acces point
+		Modification du robot			// peut être le bouger en 1.3
+			- changement de la caméra
+			- streaming video avec netcat
+			- config de raspivid
+			- modif l'application de commande
+	Le magnétomètre
+		Technologie du capteur
+			- comment fonctionne un magnétomètre ?
+		Utilisation du MPU9150
+			- gyromètre
+			- accéléromètre
+Acquisition des données d'un magnétomètre
+	Analyse du fonctionnement du capteur
+		Protocole I2C
+			- caractéristiques électroniques
+			- format des trames
+		Registres du capteur
+			- puce esclave de la centrale inertielle
+			- mode single measurement
+	Communication avec le capteur sur Arduino
+		Montage des composants
+			- compatibilité 3.3v (MPU9150) et 5v (arduino)
+			- shield ethernet
+		Analyse de l'application
+			- commande du capteur
+			- format des trames
+		Conception de l'application
+			- communication par port série et ethernet
+			- config ethernet
+			- filtre de Kalman simplifié
+			- réinitialisation de la valeur
+			- calibrage du magnétomètre
+	Communication avec le capteur sur Raspeberry Pi
+		Montage des composants
+			- utilisation des GPIO
+		Conception de l'application
+			- la bibliothèque WiringPi
+			- architecture multithreadée
+Interfaçage et contrôle du magnétomètre
