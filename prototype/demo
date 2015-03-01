@@ -1,0 +1,72 @@
+#!/bin/bash
+# Ce script permet d'automatiser le lancement des différentes commandes
+# pour démarrer la video, le routage de la raspberry, le programme de
+# contrôle du robot et d'autres trucs.
+
+# réseau
+video_port=42666
+compass_port=1337
+raspi_addr='newton'
+local_addr='192.168.0.1'
+robot_addr='192.168.0.112'
+
+# vidéo
+width=1280
+height=720
+fps=25
+bitrate=100000	# 100 kbps
+
+# Affichage de la vidéo
+video() {
+	nc -l -p $video_port | mplayer --demuxer=h264es - >/dev/null &
+	ssh pi@$raspi_addr \
+		"raspivid -t 0 -w $width -h $height -fps $fps -b $bitrate -o - \
+		| nc $local_addr $video_port"
+}
+
+# configuration de la raspberry en routeur
+raspi_forwarding() {
+	ssh pi@$raspi_addr \
+		'[ $(cat /proc/sys/net/ipv4/ip_forward) -eq 0 ] && ~/bin/router'
+}
+
+# Démarrage de la boussole
+compass() {
+	ssh pi@$raspi_addr \
+		'pgrep mag >/dev/null \
+		|| nohup 2>/dev/null sudo ~/cpp/mag/mag >/dev/null &'
+	nc $raspi_addr $compass_port | ../boussole/boussole
+}
+
+kill_cmd() {
+	tty=$(tty | sed 'sZ^/dev/ZZ')
+
+	for prog in boussole nc mplayer gamepad ; do
+		pkill -t $tty $prog
+	done
+}
+
+
+trap 'kill_cmd' SIGINT SIGQUIT SIGTERM
+
+echo -n 'Lancer la commande du robot ? [Y/n] (y) : ' ; read rep 
+if [ -z "$rep" -o "$rep" = 'y' ] ; then
+	forward='yes'
+	c_gamepad='yes'
+fi
+
+echo -n 'Lancer la boussole ? [Y/n] (y) : ' ; read rep 
+if [ -z "$rep" -o "$rep" = 'y' ] ; then
+	forward='yes'
+	c_compass='yes'
+fi
+
+echo -n 'Lancer la vidéo ? [Y/n] (y) : ' ; read rep 
+[ -z "$rep" -o "$rep" = 'y' ] && c_video='yes'
+
+[ -n "$forward" ] && raspi_forwarding
+[ -n "$c_gamepad" ] && ../gamepad/gamepad &
+[ -n "$c_compass" ] && compass &
+[ -n "$c_video" ] && video &
+
+wait
