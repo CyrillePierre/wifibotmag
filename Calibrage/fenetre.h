@@ -4,8 +4,8 @@
 #include <QMainWindow>
 #include <QGridLayout>
 
-class Connexion_ui;
-class Calibrage_ui;
+class ConnexionUI;
+class CalibrageUI;
 class Courbe;
 class Log;
 
@@ -20,7 +20,7 @@ public:
     Fenetre();
 
 public slots:
-    void connect_graphic();
+    void connectGraphic();
 
 private:
     void initGrid();
@@ -28,8 +28,8 @@ private:
     QWidget *central;
     QGridLayout *grid;
 
-    Connexion_ui *con;
-    Calibrage_ui *calibrage;
+    ConnexionUI *con;
+    CalibrageUI *calibrage;
     Courbe       *curve;
     Log          *log;
 };

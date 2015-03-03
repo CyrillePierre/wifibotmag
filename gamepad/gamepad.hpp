@@ -4,7 +4,7 @@
 #include <functional>
 #include <utility>
 #include <map>
-#include <SDL2/SDL.h>
+#include <SDL/SDL.h>
 #include "stdint.h"
 
 /**

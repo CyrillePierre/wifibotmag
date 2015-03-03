@@ -14,7 +14,7 @@ CC            = gcc
 CXX           = g++
 DEFINES       = -DQT_WIDGETS_LIB -DQT_NETWORK_LIB -DQT_GUI_LIB -DQT_CORE_LIB
 CFLAGS        = -m64 -pipe -g -Wall -W -D_REENTRANT -fPIE $(DEFINES)
-CXXFLAGS      = -m64 -pipe -g -Wall -W -D_REENTRANT -fPIE $(DEFINES)
+CXXFLAGS      = -std=c++11 -g -Wall -W -D_REENTRANT -fPIE $(DEFINES)
 INCPATH       = -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++-64 -I../Calibrage -I/usr/local/qwt/include -isystem /usr/include/x86_64-linux-gnu/qt5 -isystem /usr/include/x86_64-linux-gnu/qt5/QtWidgets -isystem /usr/include/x86_64-linux-gnu/qt5/QtNetwork -isystem /usr/include/x86_64-linux-gnu/qt5/QtGui -isystem /usr/include/x86_64-linux-gnu/qt5/QtCore -I. -I.
 LINK          = g++
 LFLAGS        = -m64
@@ -48,30 +48,30 @@ OBJECTS_DIR   = ./
 SOURCES       = ../Calibrage/calibrage.cpp \
 		../Calibrage/courbe.cpp \
 		../Calibrage/main.cpp \
-		../Calibrage/calibrage_ui.cpp \
 		../Calibrage/fenetre.cpp \
-		../Calibrage/connexion_ui.cpp \
 		../Calibrage/log.cpp \
-		../Calibrage/mysocket.cpp moc_courbe.cpp \
-		moc_calibrage_ui.cpp \
+		../Calibrage/mysocket.cpp \
+		../Calibrage/calibrageUI.cpp \
+		../Calibrage/connexionUI.cpp moc_courbe.cpp \
 		moc_fenetre.cpp \
-		moc_connexion_ui.cpp \
 		moc_log.cpp \
-		moc_mysocket.cpp
+		moc_mysocket.cpp \
+		moc_calibrageUI.cpp \
+		moc_connexionUI.cpp
 OBJECTS       = calibrage.o \
 		courbe.o \
 		main.o \
-		calibrage_ui.o \
 		fenetre.o \
-		connexion_ui.o \
 		log.o \
 		mysocket.o \
+		calibrageUI.o \
+		connexionUI.o \
 		moc_courbe.o \
-		moc_calibrage_ui.o \
 		moc_fenetre.o \
-		moc_connexion_ui.o \
 		moc_log.o \
-		moc_mysocket.o
+		moc_mysocket.o \
+		moc_calibrageUI.o \
+		moc_connexionUI.o
 DIST          = /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/spec_pre.prf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/common/shell-unix.conf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/common/unix.conf \
@@ -134,11 +134,11 @@ DIST          = /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/spec_pre.prf \
 		../Calibrage/Calibrage.pro ../Calibrage/calibrage.cpp \
 		../Calibrage/courbe.cpp \
 		../Calibrage/main.cpp \
-		../Calibrage/calibrage_ui.cpp \
 		../Calibrage/fenetre.cpp \
-		../Calibrage/connexion_ui.cpp \
 		../Calibrage/log.cpp \
-		../Calibrage/mysocket.cpp
+		../Calibrage/mysocket.cpp \
+		../Calibrage/calibrageUI.cpp \
+		../Calibrage/connexionUI.cpp
 QMAKE_TARGET  = Calibrage
 DESTDIR       = #avoid trailing-slash linebreak
 TARGET        = Calibrage
@@ -307,7 +307,7 @@ qmake_all: FORCE
 
 dist: 
 	@test -d .tmp/Calibrage1.0.0 || mkdir -p .tmp/Calibrage1.0.0
-	$(COPY_FILE) --parents $(DIST) .tmp/Calibrage1.0.0/ && $(COPY_FILE) --parents ../Calibrage/calibrage.h ../Calibrage/courbe.h ../Calibrage/calibrage_ui.h ../Calibrage/fenetre.h ../Calibrage/connexion_ui.h ../Calibrage/log.h ../Calibrage/mysocket.h .tmp/Calibrage1.0.0/ && $(COPY_FILE) --parents ../Calibrage/calibrage.cpp ../Calibrage/courbe.cpp ../Calibrage/main.cpp ../Calibrage/calibrage_ui.cpp ../Calibrage/fenetre.cpp ../Calibrage/connexion_ui.cpp ../Calibrage/log.cpp ../Calibrage/mysocket.cpp .tmp/Calibrage1.0.0/ && (cd `dirname .tmp/Calibrage1.0.0` && $(TAR) Calibrage1.0.0.tar Calibrage1.0.0 && $(COMPRESS) Calibrage1.0.0.tar) && $(MOVE) `dirname .tmp/Calibrage1.0.0`/Calibrage1.0.0.tar.gz . && $(DEL_FILE) -r .tmp/Calibrage1.0.0
+	$(COPY_FILE) --parents $(DIST) .tmp/Calibrage1.0.0/ && $(COPY_FILE) --parents ../Calibrage/calibrage.h ../Calibrage/courbe.h ../Calibrage/fenetre.h ../Calibrage/log.h ../Calibrage/mysocket.h ../Calibrage/calibrageUI.h ../Calibrage/connexionUI.h .tmp/Calibrage1.0.0/ && $(COPY_FILE) --parents ../Calibrage/calibrage.cpp ../Calibrage/courbe.cpp ../Calibrage/main.cpp ../Calibrage/fenetre.cpp ../Calibrage/log.cpp ../Calibrage/mysocket.cpp ../Calibrage/calibrageUI.cpp ../Calibrage/connexionUI.cpp .tmp/Calibrage1.0.0/ && (cd `dirname .tmp/Calibrage1.0.0` && $(TAR) Calibrage1.0.0.tar Calibrage1.0.0 && $(COMPRESS) Calibrage1.0.0.tar) && $(MOVE) `dirname .tmp/Calibrage1.0.0`/Calibrage1.0.0.tar.gz . && $(DEL_FILE) -r .tmp/Calibrage1.0.0
 
 
 clean:compiler_clean 
@@ -330,9 +330,9 @@ check: first
 
 compiler_rcc_make_all:
 compiler_rcc_clean:
-compiler_moc_header_make_all: moc_courbe.cpp moc_calibrage_ui.cpp moc_fenetre.cpp moc_connexion_ui.cpp moc_log.cpp moc_mysocket.cpp
+compiler_moc_header_make_all: moc_courbe.cpp moc_fenetre.cpp moc_log.cpp moc_mysocket.cpp moc_calibrageUI.cpp moc_connexionUI.cpp
 compiler_moc_header_clean:
-	-$(DEL_FILE) moc_courbe.cpp moc_calibrage_ui.cpp moc_fenetre.cpp moc_connexion_ui.cpp moc_log.cpp moc_mysocket.cpp
+	-$(DEL_FILE) moc_courbe.cpp moc_fenetre.cpp moc_log.cpp moc_mysocket.cpp moc_calibrageUI.cpp moc_connexionUI.cpp
 moc_courbe.cpp: /usr/local/qwt-6.1.3-svn/include/qwt_plot.h \
 		/usr/local/qwt-6.1.3-svn/include/qwt_global.h \
 		/usr/local/qwt-6.1.3-svn/include/qwt_text.h \
@@ -357,20 +357,20 @@ moc_courbe.cpp: /usr/local/qwt-6.1.3-svn/include/qwt_plot.h \
 		../Calibrage/courbe.h
 	/usr/lib/x86_64-linux-gnu/qt5/bin/moc $(DEFINES) -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++-64 -I/home/toto/Documents/isima/projet/wifibotmag-code/Calibrage -I/usr/local/qwt/include -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtNetwork -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I. -I/usr/include/c++/4.9 -I/usr/include/x86_64-linux-gnu/c++/4.9 -I/usr/include/c++/4.9/backward -I/usr/lib/gcc/x86_64-linux-gnu/4.9/include -I/usr/local/include -I/usr/lib/gcc/x86_64-linux-gnu/4.9/include-fixed -I/usr/include/x86_64-linux-gnu -I/usr/include ../Calibrage/courbe.h -o moc_courbe.cpp
 
-moc_calibrage_ui.cpp: ../Calibrage/calibrage_ui.h
-	/usr/lib/x86_64-linux-gnu/qt5/bin/moc $(DEFINES) -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++-64 -I/home/toto/Documents/isima/projet/wifibotmag-code/Calibrage -I/usr/local/qwt/include -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtNetwork -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I. -I/usr/include/c++/4.9 -I/usr/include/x86_64-linux-gnu/c++/4.9 -I/usr/include/c++/4.9/backward -I/usr/lib/gcc/x86_64-linux-gnu/4.9/include -I/usr/local/include -I/usr/lib/gcc/x86_64-linux-gnu/4.9/include-fixed -I/usr/include/x86_64-linux-gnu -I/usr/include ../Calibrage/calibrage_ui.h -o moc_calibrage_ui.cpp
-
 moc_fenetre.cpp: ../Calibrage/fenetre.h
 	/usr/lib/x86_64-linux-gnu/qt5/bin/moc $(DEFINES) -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++-64 -I/home/toto/Documents/isima/projet/wifibotmag-code/Calibrage -I/usr/local/qwt/include -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtNetwork -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I. -I/usr/include/c++/4.9 -I/usr/include/x86_64-linux-gnu/c++/4.9 -I/usr/include/c++/4.9/backward -I/usr/lib/gcc/x86_64-linux-gnu/4.9/include -I/usr/local/include -I/usr/lib/gcc/x86_64-linux-gnu/4.9/include-fixed -I/usr/include/x86_64-linux-gnu -I/usr/include ../Calibrage/fenetre.h -o moc_fenetre.cpp
-
-moc_connexion_ui.cpp: ../Calibrage/connexion_ui.h
-	/usr/lib/x86_64-linux-gnu/qt5/bin/moc $(DEFINES) -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++-64 -I/home/toto/Documents/isima/projet/wifibotmag-code/Calibrage -I/usr/local/qwt/include -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtNetwork -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I. -I/usr/include/c++/4.9 -I/usr/include/x86_64-linux-gnu/c++/4.9 -I/usr/include/c++/4.9/backward -I/usr/lib/gcc/x86_64-linux-gnu/4.9/include -I/usr/local/include -I/usr/lib/gcc/x86_64-linux-gnu/4.9/include-fixed -I/usr/include/x86_64-linux-gnu -I/usr/include ../Calibrage/connexion_ui.h -o moc_connexion_ui.cpp
 
 moc_log.cpp: ../Calibrage/log.h
 	/usr/lib/x86_64-linux-gnu/qt5/bin/moc $(DEFINES) -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++-64 -I/home/toto/Documents/isima/projet/wifibotmag-code/Calibrage -I/usr/local/qwt/include -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtNetwork -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I. -I/usr/include/c++/4.9 -I/usr/include/x86_64-linux-gnu/c++/4.9 -I/usr/include/c++/4.9/backward -I/usr/lib/gcc/x86_64-linux-gnu/4.9/include -I/usr/local/include -I/usr/lib/gcc/x86_64-linux-gnu/4.9/include-fixed -I/usr/include/x86_64-linux-gnu -I/usr/include ../Calibrage/log.h -o moc_log.cpp
 
 moc_mysocket.cpp: ../Calibrage/mysocket.h
 	/usr/lib/x86_64-linux-gnu/qt5/bin/moc $(DEFINES) -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++-64 -I/home/toto/Documents/isima/projet/wifibotmag-code/Calibrage -I/usr/local/qwt/include -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtNetwork -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I. -I/usr/include/c++/4.9 -I/usr/include/x86_64-linux-gnu/c++/4.9 -I/usr/include/c++/4.9/backward -I/usr/lib/gcc/x86_64-linux-gnu/4.9/include -I/usr/local/include -I/usr/lib/gcc/x86_64-linux-gnu/4.9/include-fixed -I/usr/include/x86_64-linux-gnu -I/usr/include ../Calibrage/mysocket.h -o moc_mysocket.cpp
+
+moc_calibrageUI.cpp: ../Calibrage/calibrageUI.h
+	/usr/lib/x86_64-linux-gnu/qt5/bin/moc $(DEFINES) -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++-64 -I/home/toto/Documents/isima/projet/wifibotmag-code/Calibrage -I/usr/local/qwt/include -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtNetwork -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I. -I/usr/include/c++/4.9 -I/usr/include/x86_64-linux-gnu/c++/4.9 -I/usr/include/c++/4.9/backward -I/usr/lib/gcc/x86_64-linux-gnu/4.9/include -I/usr/local/include -I/usr/lib/gcc/x86_64-linux-gnu/4.9/include-fixed -I/usr/include/x86_64-linux-gnu -I/usr/include ../Calibrage/calibrageUI.h -o moc_calibrageUI.cpp
+
+moc_connexionUI.cpp: ../Calibrage/connexionUI.h
+	/usr/lib/x86_64-linux-gnu/qt5/bin/moc $(DEFINES) -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++-64 -I/home/toto/Documents/isima/projet/wifibotmag-code/Calibrage -I/usr/local/qwt/include -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtNetwork -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I. -I/usr/include/c++/4.9 -I/usr/include/x86_64-linux-gnu/c++/4.9 -I/usr/include/c++/4.9/backward -I/usr/lib/gcc/x86_64-linux-gnu/4.9/include -I/usr/local/include -I/usr/lib/gcc/x86_64-linux-gnu/4.9/include-fixed -I/usr/include/x86_64-linux-gnu -I/usr/include ../Calibrage/connexionUI.h -o moc_connexionUI.cpp
 
 compiler_moc_source_make_all:
 compiler_moc_source_clean:
@@ -386,7 +386,8 @@ compiler_clean: compiler_moc_header_clean
 
 ####### Compile
 
-calibrage.o: ../Calibrage/calibrage.cpp ../Calibrage/calibrage.h
+calibrage.o: ../Calibrage/calibrage.cpp ../Calibrage/calibrage.h \
+		../Calibrage/log.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o calibrage.o ../Calibrage/calibrage.cpp
 
 courbe.o: ../Calibrage/courbe.cpp ../Calibrage/courbe.h \
@@ -412,19 +413,14 @@ courbe.o: ../Calibrage/courbe.cpp ../Calibrage/courbe.h \
 		/usr/local/qwt-6.1.3-svn/include/qwt_series_store.h \
 		/usr/local/qwt-6.1.3-svn/include/qwt_plot_marker.h \
 		../Calibrage/log.h \
+		../Calibrage/calibrage.h \
 		/usr/local/qwt-6.1.3-svn/include/qwt_symbol.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o courbe.o ../Calibrage/courbe.cpp
 
 main.o: ../Calibrage/main.cpp ../Calibrage/fenetre.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o main.o ../Calibrage/main.cpp
 
-calibrage_ui.o: ../Calibrage/calibrage_ui.cpp ../Calibrage/calibrage_ui.h \
-		../Calibrage/log.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o calibrage_ui.o ../Calibrage/calibrage_ui.cpp
-
 fenetre.o: ../Calibrage/fenetre.cpp ../Calibrage/fenetre.h \
-		../Calibrage/connexion_ui.h \
-		../Calibrage/calibrage_ui.h \
 		../Calibrage/courbe.h \
 		/usr/local/qwt-6.1.3-svn/include/qwt_plot.h \
 		/usr/local/qwt-6.1.3-svn/include/qwt_global.h \
@@ -451,11 +447,6 @@ fenetre.o: ../Calibrage/fenetre.cpp ../Calibrage/fenetre.h \
 		../Calibrage/mysocket.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o fenetre.o ../Calibrage/fenetre.cpp
 
-connexion_ui.o: ../Calibrage/connexion_ui.cpp ../Calibrage/connexion_ui.h \
-		../Calibrage/log.h \
-		../Calibrage/mysocket.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o connexion_ui.o ../Calibrage/connexion_ui.cpp
-
 log.o: ../Calibrage/log.cpp ../Calibrage/log.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o log.o ../Calibrage/log.cpp
 
@@ -463,23 +454,31 @@ mysocket.o: ../Calibrage/mysocket.cpp ../Calibrage/mysocket.h \
 		../Calibrage/log.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o mysocket.o ../Calibrage/mysocket.cpp
 
+calibrageUI.o: ../Calibrage/calibrageUI.cpp ../Calibrage/calibrageUI.h \
+		../Calibrage/log.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o calibrageUI.o ../Calibrage/calibrageUI.cpp
+
+connexionUI.o: ../Calibrage/connexionUI.cpp ../Calibrage/log.h \
+		../Calibrage/mysocket.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o connexionUI.o ../Calibrage/connexionUI.cpp
+
 moc_courbe.o: moc_courbe.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_courbe.o moc_courbe.cpp
 
-moc_calibrage_ui.o: moc_calibrage_ui.cpp 
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_calibrage_ui.o moc_calibrage_ui.cpp
-
 moc_fenetre.o: moc_fenetre.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_fenetre.o moc_fenetre.cpp
-
-moc_connexion_ui.o: moc_connexion_ui.cpp 
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_connexion_ui.o moc_connexion_ui.cpp
 
 moc_log.o: moc_log.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_log.o moc_log.cpp
 
 moc_mysocket.o: moc_mysocket.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_mysocket.o moc_mysocket.cpp
+
+moc_calibrageUI.o: moc_calibrageUI.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_calibrageUI.o moc_calibrageUI.cpp
+
+moc_connexionUI.o: moc_connexionUI.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_connexionUI.o moc_connexionUI.cpp
 
 ####### Install
 

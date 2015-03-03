@@ -6,7 +6,7 @@
 
 /**
  * Cette classe correspond à la trame d'envoi de données sur le réseau.
- * Elle est composé d'un identifiant, du vecteur magnétomètre brute et de
+ * Elle est composée d'un identifiant, du vecteur magnétomètre brute et de
  * l'angle du vecteur.
  */
 struct Packet

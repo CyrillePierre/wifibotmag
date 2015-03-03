@@ -13,7 +13,7 @@ class Thread : public QThread
     private:
         double value;
         static int const SIZE = 7;
-        char buffer[SIZE];
+        unsigned char buffer[SIZE];
 
         void run();
 

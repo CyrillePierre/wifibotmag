@@ -15,7 +15,7 @@ private:
      QThread *thread;
 
 public:
-    explicit Window();
+    Window();
     ~Window();
 };
 

@@ -1,0 +1,12 @@
+Commit des fichiers de conf
+--Cette ligne, et les suivantes ci-dessous, seront ignorées--
+
+M    boussole/Makefile
+M    boussole/Thread.cpp
+M    boussole/boussole
+M    boussole/boussole.pro
+M    boussole/boussole.pro.user
+M    boussole/main.cpp
+M    boussole/moc_Thread.cpp
+M    boussole/moc_window.cpp
+M    boussole/ui_window.h

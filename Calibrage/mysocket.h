@@ -18,10 +18,12 @@ class MySocket : public QThread
     Q_OBJECT
 
 public:
-    MySocket(Log *log);
+    MySocket();
 
     int connection(char const *name, char const *port);
-    bool is_connected();
+    bool isConnected();
+
+
 
     virtual ~MySocket();
 
@@ -29,25 +31,26 @@ public slots:
     void connected();
     void disconnected();
 
-    void set_started();
+    void setStarted(bool s);
+    void writeBiais();
 
 signals:
-    void changed(QVector2D);
-    void connect_change(bool);
+    void changed(QPointF);
+    void connectChange(bool);
 
 private:
+    // Méthodes
     void run();
     int createTCPSocket(char const *name, char const *port);
 
-    //QTcpSocket *socket;
-
+    // Attributs
     bool        _connected;
     bool        _started;
 
-    char        buff[MAX_SIZE];
-    QVector2D   vect;
+    unsigned char        buff[MAX_SIZE];
+    unsigned char        writeBuff[MAX_SIZE];
 
-    Log *log;
+    QPointF              point;
 
     int sockfd;
 };

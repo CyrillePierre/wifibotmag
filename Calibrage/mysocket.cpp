@@ -1,5 +1,6 @@
 #include "mysocket.h"
 #include "log.h"
+#include "calibrage.h"
 
 #include <unistd.h>
 #include <netdb.h>
@@ -7,6 +8,7 @@
 #include <string.h>
 #include <sys/socket.h>
 
+#include <stdio.h>
 
 /**
  * Cette fonction permet de créer une socket de type TCP puis la
@@ -27,14 +29,14 @@ int MySocket::connection(const char *name, char const *port)
     int err = getaddrinfo(name, port, &hints, &res);
     if(err != 0)
     {
-        log->append_error(gai_strerror(err));
+        Log::get()->appendError(gai_strerror(err));
         return -1;
     }
 
     sockfd = socket(res->ai_family, res->ai_socktype, 0);
     if(sockfd == -1)
     {
-        log->append_error(strerror(errno));
+        Log::get()->appendError(strerror(errno));
         return -1;
 
     }
@@ -42,17 +44,17 @@ int MySocket::connection(const char *name, char const *port)
     err = ::connect(sockfd, res->ai_addr, res->ai_addrlen);
     if(err == -1)
     {
-        log->append_error(strerror(errno));
+        Log::get()->appendError(strerror(errno));
         return -1;
     }
 
     connected();
+
+    return 1;
 }
 
-MySocket::MySocket(Log *log)
+MySocket::MySocket()
 {
-    this->log = log;
-
     _connected  = false;    // Quand on commence on n'est pas connecté
     _started    = false;    // Au début on n'envoie pas les données
 }
@@ -62,11 +64,11 @@ MySocket::MySocket(Log *log)
  */
 void MySocket::connected()
 {
-    log->append("- Connexion réussie");
+    Log::get()->append("- Connexion réussie");
 
     _connected = true;
 
-    emit connect_change(_connected);
+    emit connectChange(_connected);
 }
 
 /**
@@ -74,11 +76,11 @@ void MySocket::connected()
  */
 void MySocket::disconnected()
 {
-    log->append("Déconnexion");
+    Log::get()->append("Déconnexion");
 
     _connected = false;
 
-    emit connect_change(_connected);
+    emit connectChange(_connected);
 }
 
 /**
@@ -86,53 +88,86 @@ void MySocket::disconnected()
  */
 void MySocket::run()
 {
-    while(_started)
+    while(1)
     {
         int a;
 
         a = read(sockfd, buff, SIZE);
 
-        // Si on a lu une trame entière
-        if (a == SIZE)
+        if(_started)
         {
-            qDebug() << "start";
+            // Si on a lu une trame entière
+            if (a == SIZE)
+            {
+                int16_t x = buff[2] + (((int16_t) buff[1]) << 8);   // On recupère mx
+                int16_t y  = buff[4] + (((int16_t) buff[3]) << 8);  // On recupère my
 
-            int16_t x  = buff[1] << 8; // On recupère les 8 premiers bits de mx
-            x  |= buff[2];             // On récupère les 8 derniers
+                point.setX(x);
+                point.setY(y);
 
-            int16_t y  = buff[3] << 8; // On recupère les 8 premiers bits de my
-            y  |= buff[4];             // On récupère les 8 derniers
+                emit changed(point);
+            }
 
-            vect.setX(x);
-            vect.setY(y);
-
-            emit changed(vect);
         }
-
     }
+}
+
+/**
+ * @brief permet d'envoyer le biais sur le réseau
+ * @param valX : la valeur du biais en x
+ * @param valY : la valeur du biais en y
+ */
+void MySocket::writeBiais()
+{
+    QPointF biais = Calibrage::getBiais();
+
+    int16_t x = (int) biais.x();
+    int16_t y = (int) biais.y();
+
+    // id du biais
+    writeBuff[0] = 2;
+
+    // x
+    writeBuff[1] = (x & 0xff00) >> 8;
+    writeBuff[2] = x & 0xff;
+
+    // y
+    writeBuff[3] = (y & 0xff00) >> 8;;
+    writeBuff[4] = y & 0xff;
+
+    // z
+    writeBuff[5] = 0;
+    writeBuff[6] = 0;
+
+    // angle
+    writeBuff[7] = 0;
+    writeBuff[8] = 0;
+
+    // On envoie le biais
+    write(sockfd, writeBuff, SIZE);
 }
 
 MySocket::~MySocket()
 {
     _connected = false;
 
-    emit connect_change(_connected);
+    emit connectChange(_connected);
 }
 
 /**
  * @brief Permet de savoir si la socket est connectée
  * @return VRAIE si la socket est connectée
  */
-bool MySocket::is_connected()
+bool MySocket::isConnected()
 {
     return _connected;
 }
 
 /**
  * @brief Permet d'envoyer ou pas les données
- * @param s
+ * @param s : VRAIE si on commence la récupération des données, FAUX sinon
  */
-void MySocket::set_started()
+void MySocket::setStarted(bool s)
 {
-    _started = !_started;
+    _started = s;
 }

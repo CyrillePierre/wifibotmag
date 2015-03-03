@@ -3,13 +3,13 @@
 # pour démarrer la video, le routage de la raspberry, le programme de
 # contrôle du robot et d'autres trucs.
 
-set -x
+#set -x
 
 # réseau
 video_port=42666
 compass_port=1337
-raspi_addr='192.168.1.5'
-local_addr='192.168.1.2'
+raspi_addr='newton'
+local_addr='toto-pc'
 robot_addr='192.168.0.112'
 robot_net='192.168.0.0'
 
@@ -39,8 +39,8 @@ raspi_forwarding() {
 # Démarrage de la boussole
 compass() {
 	ssh pi@$raspi_addr \
-		'pgrep mag >/dev/null \
-		|| nohup 2>/dev/null sudo ~/cpp/mag/mag >/dev/null &'
+		'pgrep mag >/dev/null || nohup 2>/dev/null sudo ~/cpp/mag/mag >/dev/null &' &
+	sleep 2
 	nc $raspi_addr $compass_port | ../boussole/boussole
 }
 

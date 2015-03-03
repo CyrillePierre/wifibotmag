@@ -20,7 +20,7 @@
 QT_BEGIN_MOC_NAMESPACE
 struct qt_meta_stringdata_Fenetre_t {
     QByteArrayData data[3];
-    char stringdata[25];
+    char stringdata[24];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -30,10 +30,10 @@ struct qt_meta_stringdata_Fenetre_t {
 static const qt_meta_stringdata_Fenetre_t qt_meta_stringdata_Fenetre = {
     {
 QT_MOC_LITERAL(0, 0, 7),
-QT_MOC_LITERAL(1, 8, 15),
-QT_MOC_LITERAL(2, 24, 0)
+QT_MOC_LITERAL(1, 8, 14),
+QT_MOC_LITERAL(2, 23, 0)
     },
-    "Fenetre\0connect_graphic\0"
+    "Fenetre\0connectGraphic\0"
 };
 #undef QT_MOC_LITERAL
 
@@ -64,7 +64,7 @@ void Fenetre::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, voi
     if (_c == QMetaObject::InvokeMetaMethod) {
         Fenetre *_t = static_cast<Fenetre *>(_o);
         switch (_id) {
-        case 0: _t->connect_graphic(); break;
+        case 0: _t->connectGraphic(); break;
         default: ;
         }
     }
