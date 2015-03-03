@@ -3,22 +3,25 @@
 # pour démarrer la video, le routage de la raspberry, le programme de
 # contrôle du robot et d'autres trucs.
 
+set -x
+
 # réseau
 video_port=42666
 compass_port=1337
-raspi_addr='newton'
-local_addr='192.168.0.1'
+raspi_addr='192.168.1.5'
+local_addr='192.168.1.2'
 robot_addr='192.168.0.112'
+robot_net='192.168.0.0'
 
 # vidéo
 width=1280
 height=720
 fps=25
-bitrate=100000	# 100 kbps
+bitrate=200000	# 100 kbps
 
 # Affichage de la vidéo
 video() {
-	nc -l -p $video_port | mplayer --demuxer=h264es - >/dev/null &
+	nc -l -p $video_port | mplayer --demuxer=h264es - &
 	ssh pi@$raspi_addr \
 		"raspivid -t 0 -w $width -h $height -fps $fps -b $bitrate -o - \
 		| nc $local_addr $video_port"
@@ -26,8 +29,11 @@ video() {
 
 # configuration de la raspberry en routeur
 raspi_forwarding() {
-	ssh pi@$raspi_addr \
-		'[ $(cat /proc/sys/net/ipv4/ip_forward) -eq 0 ] && ~/bin/router'
+	/sbin/route | grep -q "$robot_net" || \
+		sudo /sbin/route add -net $robot_net \
+			netmask 255.255.255.0 gw $raspi_addr
+	ssh pi@$raspi_addr '[ $(cat /proc/sys/net/ipv4/ip_forward) -eq 0 ] \
+		&& sudo ~/bin/router'
 }
 
 # Démarrage de la boussole
