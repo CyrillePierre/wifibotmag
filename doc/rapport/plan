@@ -41,24 +41,24 @@ Prise en main du matériel
 	Le wifibot
 		Architecture du robot
 			- éléments du robots
-			- architecture réseau
-		Communication avec le robot
 			- interface web
+		Communication avec le robot
+			- architecture réseau
 			- application de commande
 		Configuration du Wifi
 			- ad-hoc
 			- acces point
-		Modification du robot			// peut être le bouger en 1.3
-			- changement de la caméra
-			- streaming video avec netcat
-			- config de raspivid
-			- modif l'application de commande
 	Le magnétomètre
 		Technologie du capteur
 			- comment fonctionne un magnétomètre ?
 		Utilisation du MPU9150
 			- gyromètre
 			- accéléromètre
+	Modification du robot
+		- changement de la caméra
+		- streaming video avec netcat
+		- config de raspivid
+		- modif l'application de commande
 Acquisition des données d'un magnétomètre
 	Analyse du fonctionnement du capteur
 		Protocole I2C
