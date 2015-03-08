@@ -68,7 +68,8 @@ Acquisition des données d'un magnétomètre
 			- puce esclave de la centrale inertielle
 			- mode single measurement
 	Communication avec le capteur sur Arduino
-		Montage des composants
+		Montage des composants sur Arduino
+			- présentation de la carte
 			- compatibilité 3.3v (MPU9150) et 5v (arduino)
 			- shield ethernet
 		Analyse de l'application
@@ -81,7 +82,8 @@ Acquisition des données d'un magnétomètre
 			- réinitialisation de la valeur
 			- calibrage du magnétomètre
 	Communication avec le capteur sur Raspeberry Pi
-		Montage des composants
+		Montage des composants sur Raspberry Pi
+			- présentation de la carte
 			- utilisation des GPIO
 		Conception de l'application
 			- la bibliothèque WiringPi
