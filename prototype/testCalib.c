@@ -73,8 +73,8 @@ int main(int argc, char ** argv)
 		mz  = buf[6] + (((int16_t) buf[5]) << 8);
 		ang = buf[8] + (((int16_t) buf[7]) << 8);
 
-//		printf("[%d,%d,%d] : %d\n", mx, my, mz, ang);
-		printf("%d %d %d\n", mx, my, mz);
+		printf("[%d,%d,%d] : %f\n", mx, my, mz, (float) ang / (1 << 7));
+//		printf("%d %d %d\n", mx, my, mz);
 	}
 
 	return 0;

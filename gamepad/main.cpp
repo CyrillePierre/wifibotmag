@@ -21,9 +21,9 @@ int main()
 		driver.rightSpeed(right - dir);
 		driver.sendCmd();
 
-//		std::cout << (int)driver.leftSpeed() << "  " 
-//				  << (int)driver.rightSpeed() << "  "
-//				  << dir << std::endl;
+		std::cout << (int)driver.leftSpeed() << "  " 
+				  << (int)driver.rightSpeed() << "  "
+				  << dir << std::endl;
 	});
 
 	gp.addListener(Gamepad::BUTTON, [&sens] () {

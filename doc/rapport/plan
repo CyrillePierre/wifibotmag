@@ -85,7 +85,7 @@ Acquisition des données d'un magnétomètre
 		Montage des composants sur Raspberry Pi
 			- présentation de la carte
 			- utilisation des GPIO
-		Conception de l'application
 			- la bibliothèque WiringPi
+		Conception de l'application
 			- architecture multithreadée
 Interfaçage et contrôle du magnétomètre
