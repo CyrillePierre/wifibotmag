@@ -1,0 +1,35 @@
+II - Fonctionnement du magnétomètre (cyrille)
+    1 - Caractéristique physique
+		- l’effet Hall
+		- 3 capteurs pour 3 axes -> 2 utilisés
+    2 - Utilisation du MPU9150
+		- centrale inertielle -> accéléromètre, gyromètre
+		- image du capteur
+		- bus I²C
+    3 - Communication I²C
+		- utilisation de 2 fils
+		- communication maitres/esclaves (plusieurs) avec adresses
+    4 - Les registres
+		- écriture dans la mémoire interne du capteur
+		- lecture dans la mémoire interne
+
+III - Contrôle du MPU9150 (cyrille)
+	- application pour arduino et raspberry
+	1 - montage du capteur pour arduino
+		- arduino
+		- problème de compatibilité 5v 3.3v
+		- image du montage
+    3 - montage pour raspberry
+		- raspberry pi
+		- GPIO
+		- image du montage
+    2 - conception de l’application
+		- diagramme de classes
+		- fonctionnement de l’application
+    4 - le driver du MPU9150
+		- schéma interne du composant
+		- mode single measurement
+    5 - le réseau
+		- le protocole
+		- fonctionnement d u shield ethernet d’arduino
+		- architecture multithreadé pour la raspberry
